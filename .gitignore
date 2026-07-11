@@ -1,0 +1,10 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Nothing to build here (yet) — this repo ships raw CSS + one static HTML.
+node_modules/
+dist/

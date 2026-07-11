@@ -1,0 +1,237 @@
+/* =========================================================================
+   OMNIVORE DESIGN SYSTEM — components.css
+   Reference component layer (the "conventions"). Every rule reads from
+   tokens.css, so these components re-theme automatically between
+   light-cloud and dark-industrial with zero per-component change.
+
+   This file is the CANONICAL VISUAL SPEC. Each surface re-implements it
+   natively (HMI: Tailwind/TS; cloud: plain JSX) — but the look, spacing,
+   and states must match what this file renders. Class prefix: omv-.
+   Requires tokens.css to be linked first.
+   ========================================================================= */
+
+/* ---- Typography helpers -------------------------------------------------- */
+.omv-h1     { font-size: var(--fs-2xl); line-height: var(--lh-2xl); font-weight: var(--fw-semibold); letter-spacing: var(--tracking-tight); color: var(--text); margin: 0; }
+.omv-h2     { font-size: var(--fs-xl);  line-height: var(--lh-xl);  font-weight: var(--fw-semibold); letter-spacing: var(--tracking-tight); color: var(--text); margin: 0; }
+.omv-h3     { font-size: var(--fs-lg);  line-height: var(--lh-lg);  font-weight: var(--fw-semibold); color: var(--text); margin: 0; }
+.omv-body   { font-size: var(--fs-base); line-height: var(--lh-base); color: var(--text); }
+.omv-meta   { font-size: var(--fs-sm); line-height: var(--lh-sm); color: var(--text-secondary); }
+.omv-caption{ font-size: var(--fs-xs); line-height: var(--lh-xs); color: var(--text-tertiary); }
+.omv-eyebrow{ font-size: 11px; font-weight: var(--fw-semibold); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--text-secondary); }
+.omv-mono   { font-family: var(--font-mono); font-feature-settings: "tnum"; }
+
+/* ---- Buttons ------------------------------------------------------------- */
+.omv-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: var(--font-sans); font-weight: var(--fw-medium);
+  height: 36px; padding: 0 14px;
+  border-radius: var(--radius-md); border: 1px solid transparent; cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out);
+  white-space: nowrap;
+}
+.omv-btn:focus-visible { outline: none; box-shadow: var(--brand-ring); }
+.omv-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.omv-btn-primary   { background: var(--brand); color: var(--brand-contrast); }
+.omv-btn-primary:hover:not(:disabled)  { background: var(--brand-hover); }
+.omv-btn-primary:active:not(:disabled) { background: var(--brand-active); }
+
+.omv-btn-secondary { background: var(--surface); color: var(--text); border-color: var(--border); }
+.omv-btn-secondary:hover:not(:disabled) { background: var(--surface-raised); border-color: var(--border-strong); }
+
+.omv-btn-ghost     { background: transparent; color: var(--text-secondary); }
+.omv-btn-ghost:hover:not(:disabled) { background: var(--surface-raised); color: var(--text); }
+
+.omv-btn-danger    { background: var(--err); color: #fff; }
+.omv-btn-danger:hover:not(:disabled) { filter: brightness(0.94); }
+
+.omv-btn-dangerSoft{ background: var(--err-soft); color: var(--err); border-color: var(--err-border); }
+
+.omv-btn-sm { height: 28px; padding: 0 10px; font-size: 13px; border-radius: var(--radius-sm); }
+.omv-btn-md { height: 36px; font-size: 14px; }
+.omv-btn-lg { height: 44px; padding: 0 18px; font-size: 15px; border-radius: var(--radius-lg); }
+
+.omv-iconbtn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; background: transparent; border: 0; cursor: pointer;
+  border-radius: var(--radius-md); color: var(--text-secondary);
+  transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.omv-iconbtn:hover { background: var(--surface-raised); color: var(--text); }
+.omv-iconbtn:focus-visible { outline: none; box-shadow: var(--brand-ring); }
+
+/* ---- Inputs -------------------------------------------------------------- */
+.omv-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.omv-field-label { font-size: 13px; font-weight: var(--fw-medium); color: var(--text); }
+.omv-field-hint  { font-size: 12px; color: var(--text-secondary); }
+.omv-field-error { font-size: 12px; color: var(--err); }
+
+.omv-input-wrap {
+  position: relative; display: flex; align-items: center;
+  border: 1px solid var(--border); background: var(--surface);
+  border-radius: var(--radius-md);
+  transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+.omv-input-wrap:focus-within { border-color: var(--brand); box-shadow: var(--brand-ring); }
+.omv-input-wrap.is-error { border-color: var(--err); }
+.omv-input-wrap.has-icon > svg { position: absolute; left: 10px; color: var(--text-tertiary); }
+
+.omv-input {
+  border: 0; outline: none; background: transparent;
+  width: 100%; height: 36px; padding: 0 12px;
+  font-family: var(--font-sans); font-size: 14px; color: var(--text);
+}
+.omv-input-wrap.has-icon .omv-input { padding-left: 32px; }
+.omv-input::placeholder { color: var(--text-tertiary); }
+select.omv-input { padding-right: 32px; appearance: none; }
+
+/* ---- Badge --------------------------------------------------------------- */
+.omv-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 22px; padding: 0 8px; border-radius: var(--radius-full);
+  font-size: 12px; font-weight: var(--fw-medium); white-space: nowrap;
+}
+.omv-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.omv-badge-primary { background: var(--brand-soft); color: var(--brand-active); }
+.omv-badge-ok      { background: var(--ok-soft);   color: var(--ok); }
+.omv-badge-warn    { background: var(--warn-soft); color: var(--warn); }
+.omv-badge-danger  { background: var(--err-soft);  color: var(--err); }
+.omv-badge-info    { background: var(--info-soft); color: var(--info); }
+.omv-badge-neutral { background: var(--surface-raised); color: var(--text-secondary); }
+
+/* ---- LED (HMI status primitive — demonstrates the OK-state green) -------- */
+.omv-led { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary); }
+.omv-led-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--border-strong); }
+.omv-led-dot.is-ok   { background: var(--ok);   box-shadow: 0 0 7px color-mix(in srgb, var(--ok) 65%, transparent); }
+.omv-led-dot.is-warn { background: var(--warn); box-shadow: 0 0 7px color-mix(in srgb, var(--warn) 65%, transparent); }
+.omv-led-dot.is-err  { background: var(--err);  box-shadow: 0 0 7px color-mix(in srgb, var(--err) 65%, transparent); }
+
+/* ---- Card ---------------------------------------------------------------- */
+.omv-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+.omv-card-header {
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;
+  margin-bottom: 16px;
+}
+.omv-card-title { font-size: 16px; font-weight: var(--fw-semibold); letter-spacing: -0.005em; color: var(--text); }
+
+/* ---- Banner -------------------------------------------------------------- */
+.omv-banner {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 12px 14px; border-radius: var(--radius-md);
+  border: 1px solid; font-size: 13px; line-height: 19px;
+}
+.omv-banner-ok      { background: var(--ok-soft);   border-color: var(--ok-border);   color: var(--ok); }
+.omv-banner-warning { background: var(--warn-soft); border-color: var(--warn-border); color: var(--warn); }
+.omv-banner-danger  { background: var(--err-soft);  border-color: var(--err-border);  color: var(--err); }
+.omv-banner-info    { background: var(--info-soft); border-color: var(--info-border); color: var(--info); }
+.omv-banner-title   { font-weight: var(--fw-semibold); margin-bottom: 2px; }
+
+/* ---- Progress ------------------------------------------------------------ */
+.omv-progress { width: 100%; height: 6px; background: var(--surface-raised); border-radius: 9999px; overflow: hidden; }
+.omv-progress-bar { height: 100%; transition: width var(--dur-base) var(--ease-out); }
+.omv-progress-primary { background: var(--brand); }
+.omv-progress-info    { background: var(--info); }
+.omv-progress-warning { background: var(--warn); }
+
+/* ---- Tabs ---------------------------------------------------------------- */
+.omv-tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); }
+.omv-tab {
+  padding: 10px 14px; font-family: var(--font-sans); font-size: 14px; color: var(--text-secondary);
+  background: transparent; border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px; cursor: pointer;
+  transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+.omv-tab:hover { color: var(--text); }
+.omv-tab.is-active { color: var(--brand-active); border-bottom-color: var(--brand); font-weight: var(--fw-semibold); }
+
+/* ---- Table --------------------------------------------------------------- */
+.omv-table { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+.omv-thead {
+  display: grid; padding: 10px 16px; background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  font-size: 12px; font-weight: var(--fw-semibold); color: var(--text-secondary);
+  text-transform: uppercase; letter-spacing: 0.04em;
+}
+.omv-trow {
+  display: grid; padding: 14px 16px; border-bottom: 1px solid var(--border-light);
+  align-items: center; transition: background var(--dur-fast) var(--ease-out);
+}
+.omv-trow:last-child { border-bottom: 0; }
+.omv-trow:hover { background: var(--surface-raised); }
+
+/* ---- Key / Value --------------------------------------------------------- */
+.omv-kv { display: flex; flex-direction: column; gap: 4px; }
+.omv-kv-label { font-size: 12px; color: var(--text-tertiary); }
+.omv-kv-value { font-size: 14px; color: var(--text); font-weight: var(--fw-medium); }
+
+/* ---- Avatar -------------------------------------------------------------- */
+.omv-avatar {
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%; background: var(--brand-soft); color: var(--brand-active);
+  font-weight: var(--fw-semibold); flex: 0 0 auto;
+}
+
+/* ---- Skeleton ------------------------------------------------------------ */
+.omv-skeleton { background: var(--surface-raised); border-radius: var(--radius-xs); position: relative; overflow: hidden; }
+.omv-skeleton::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--text) 6%, transparent), transparent);
+  transform: translateX(-100%); animation: omv-shimmer 1.4s infinite;
+}
+@keyframes omv-shimmer { 100% { transform: translateX(100%); } }
+
+/* ---- Radio card (plan / option picker) ----------------------------------- */
+.omv-radio-card {
+  border: 1.5px solid var(--border); border-radius: var(--radius-lg);
+  padding: 16px; background: var(--surface); cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-out);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.omv-radio-card:hover { border-color: var(--border-strong); }
+.omv-radio-card.is-selected { border-color: var(--brand); background: var(--brand-soft); box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 12%, transparent); }
+
+/* ---- Lifecycle stepper (horizontal) -------------------------------------- */
+.omv-stepper { display: flex; align-items: flex-start; width: 100%; }
+.omv-step { display: flex; align-items: flex-start; flex: 1; min-width: 0; }
+.omv-step:last-child { flex: 0 0 auto; }
+.omv-step-inner { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 0; }
+.omv-step-dot {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: var(--fw-semibold);
+  background: var(--surface); border: 1.5px solid var(--border-strong); color: var(--text-tertiary);
+  transition: all var(--dur-base) var(--ease-out);
+}
+.omv-step-dot.is-past { background: var(--brand); border-color: var(--brand); color: #fff; }
+.omv-step-dot.is-current { border-color: var(--brand); color: var(--brand-active); box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand) 18%, transparent); }
+.omv-step-label { font-size: 12px; color: var(--text-secondary); text-align: center; line-height: 16px; }
+.omv-step-label.is-current { color: var(--text); font-weight: var(--fw-semibold); }
+.omv-step-sublabel { font-size: 11px; color: var(--text-tertiary); }
+.omv-step-line { flex: 1; height: 2px; background: var(--border); margin: 16px 6px 0; min-width: 16px; border-radius: 1px; transition: background var(--dur-base) var(--ease-out); }
+.omv-step-line.is-past { background: var(--brand); }
+
+/* ---- Modal --------------------------------------------------------------- */
+.omv-modal-scrim {
+  position: fixed; inset: 0; z-index: 100; background: rgb(2 6 12 / 0.55);
+  display: flex; align-items: center; justify-content: center; padding: 32px;
+  animation: omv-scrim-in var(--dur-slow) var(--ease-out);
+}
+@keyframes omv-scrim-in { from { opacity: 0 } to { opacity: 1 } }
+.omv-modal {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-xl); box-shadow: var(--shadow-xl);
+  width: 100%; max-width: 520px; max-height: 90vh; display: flex; flex-direction: column;
+  animation: omv-modal-in var(--dur-slow) var(--ease-out);
+}
+@keyframes omv-modal-in { from { opacity: 0; transform: translateY(4px) scale(0.98) } to { opacity: 1; transform: none } }
+.omv-modal-header { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px 14px; border-bottom: 1px solid var(--border-light); }
+.omv-modal-title { font-size: 16px; font-weight: var(--fw-semibold); color: var(--text); }
+.omv-modal-body { padding: 18px 20px; overflow-y: auto; color: var(--text); }
+.omv-modal-footer { padding: 14px 20px; border-top: 1px solid var(--border-light); display: flex; justify-content: flex-end; gap: 8px; }

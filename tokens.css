@@ -1,0 +1,191 @@
+/* =========================================================================
+   OMNIVORE DESIGN SYSTEM — tokens.css
+   Single source of truth for the whole venture. Framework-neutral CSS
+   custom properties, consumed by BOTH surfaces:
+     - the customer-ops cloud dashboard (light-cloud theme, plain CSS)
+     - the industrial HMI on the WAGO panel (dark-industrial theme, Tailwind)
+
+   How to consume
+   --------------
+   1. Link this file: <link rel="stylesheet" href="tokens.css">
+   2. Pick a theme on <html> (or any wrapper):
+        <html data-theme="light-cloud">    (default; may be omitted)
+        <html data-theme="dark-industrial">
+   3. Reference tokens via var(--...). Never hard-code a hex value.
+      Tailwind (HMI) maps its color keys to these vars, e.g.
+        colors: { brand: "var(--brand)", ok: "var(--ok)" }
+
+   Naming contract
+   ---------------
+   Token NAMES are theme-invariant (semantic roles). Only their VALUES
+   change per theme. Add a role once here; both surfaces inherit it.
+
+   THE TWO-GREEN RULE (why there are two greens)
+   ---------------------------------------------
+   --brand  = the ONE company accent (Material Green). INTERACTIVE ONLY:
+              primary CTAs, focus rings, selected/active, links, brand marks.
+   --ok     = OPERATIONAL STATE only (a distinct, cooler emerald):
+              "running / healthy / present" LEDs, status pills.
+   They are deliberately different hues (warm brand vs cool status) so that
+   on the dark panel a green button never reads as an "OK" state and vice
+   versa. Do not use --brand for status, or --ok for interaction.
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   THEME-INVARIANT TOKENS — identical in every theme.
+   Typography, spacing, radii, motion. (Colors + shadows live per-theme.)
+   ------------------------------------------------------------------------- */
+:root {
+  /* Fonts -------------------------------------------------------------- */
+  --font-sans: "Inter", "InterVariable", system-ui, -apple-system,
+               "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code",
+               "SF Mono", Menlo, Consolas, monospace;
+
+  /* Type scale — body 14, headings 18/24/30. Line-heights tuned for density. */
+  --fs-xs:   12px;   --lh-xs:  16px;   /* meta, captions */
+  --fs-sm:   13px;   --lh-sm:  18px;   /* secondary labels */
+  --fs-base: 14px;   --lh-base:20px;   /* body, table cells */
+  --fs-md:   15px;   --lh-md:  22px;   /* button text, important body */
+  --fs-lg:   18px;   --lh-lg:  26px;   /* h3, card titles */
+  --fs-xl:   24px;   --lh-xl:  32px;   /* h2, screen titles */
+  --fs-2xl:  30px;   --lh-2xl: 38px;   /* h1, hero numbers */
+  --fs-3xl:  36px;   --lh-3xl: 44px;   /* rare — empty-state callouts */
+
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+
+  --tracking-tight:  -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.02em;
+  --tracking-caps:   0.06em;           /* small uppercase labels */
+
+  /* Spacing — 4px grid. Base padding 16/24. Compose, don't override. */
+  --space-0:  0;
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Radii — inputs/small buttons 6/8; cards 10/14; modals 14; pills full. */
+  --radius-xs:   4px;
+  --radius-sm:   6px;
+  --radius-md:   8px;
+  --radius-lg:   10px;
+  --radius-xl:   14px;
+  --radius-2xl:  20px;
+  --radius-full: 9999px;
+
+  /* Motion — refined, never instant. 120ms hover, 180ms layout, 240ms modal. */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:  cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-io:  cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 120ms;
+  --dur-base: 180ms;
+  --dur-slow: 240ms;
+
+  /* Touch targets — the HMI runs on a gloved WAGO Web Panel 400.
+     Cloud ignores these; the panel uses .tap / .tap-lg helpers. */
+  --tap:    44px;
+  --tap-lg: 56px;
+}
+
+/* -------------------------------------------------------------------------
+   THEME: light-cloud  (customer-ops dashboard) — also the DEFAULT.
+   A page with no [data-theme] gets these values.
+   ------------------------------------------------------------------------- */
+:root,
+[data-theme="light-cloud"] {
+  color-scheme: light;
+
+  /* Brand — Material Green. Interactive only (see two-green rule). */
+  --brand:          #4caf50;   /* Green 500 */
+  --brand-hover:    #388e3c;   /* Green 700 */
+  --brand-active:   #2e7d32;   /* Green 800 */
+  --brand-soft:     #e8f5e9;   /* Green 50 — subtle fills, selected rows */
+  --brand-contrast: #ffffff;   /* text/icon on a solid brand fill */
+  --brand-ring:     0 0 0 3px rgb(76 175 80 / 0.28);
+
+  /* State — reserved for status meaning. Never decorative. */
+  --ok:         #10b981;  --ok-soft:   #ecfdf5;  --ok-border:   #a7f3d0;  /* emerald: cool status green */
+  --warn:       #f59e0b;  --warn-soft: #fffbeb;  --warn-border: #fde68a;
+  --err:        #ef4444;  --err-soft:  #fef2f2;  --err-border:  #fecaca;
+  --info:       #06b6d4;  --info-soft: #ecfeff;  --info-border: #a5f3fc;
+
+  /* Surfaces — canvas (page) / surface (card) / raised (hover, wells). */
+  --bg:              #f8fafc;   /* slate-50  — page canvas */
+  --surface:         #ffffff;   /* white     — cards, panels */
+  --surface-raised:  #f1f5f9;   /* slate-100 — hover rows, inset wells */
+
+  /* Text — three tiers. Never pure black. */
+  --text:            #0f172a;   /* slate-900 */
+  --text-secondary:  #475569;   /* slate-600 */
+  --text-tertiary:   #94a3b8;   /* slate-400 */
+
+  /* Borders — default / light divider / strong emphasis. */
+  --border:          #e2e8f0;   /* slate-200 */
+  --border-light:    #f1f5f9;   /* slate-100 */
+  --border-strong:   #cbd5e1;   /* slate-300 */
+
+  /* Shadows — multi-layer, low opacity. Never a single heavy drop. */
+  --shadow-xs:  0 1px 2px 0 rgb(15 23 42 / 0.04);
+  --shadow-sm:  0 1px 2px 0 rgb(15 23 42 / 0.04), 0 1px 3px 0 rgb(15 23 42 / 0.06);
+  --shadow-md:  0 2px 4px -1px rgb(15 23 42 / 0.04), 0 4px 8px -2px rgb(15 23 42 / 0.08);
+  --shadow-lg:  0 4px 6px -2px rgb(15 23 42 / 0.04), 0 12px 24px -6px rgb(15 23 42 / 0.10);
+  --shadow-xl:  0 8px 16px -4px rgb(15 23 42 / 0.06), 0 24px 48px -12px rgb(15 23 42 / 0.16);
+  --shadow-inset: inset 0 1px 2px 0 rgb(15 23 42 / 0.06);
+}
+
+/* -------------------------------------------------------------------------
+   THEME: dark-industrial  (HMI on the WAGO panel).
+   Derived from the HMI's GitHub-dark-based "Industrial Glass" palette.
+   Brand stays green; the retired teal is demoted to the INFO hue.
+   ------------------------------------------------------------------------- */
+[data-theme="dark-industrial"] {
+  color-scheme: dark;
+
+  /* Brand — same Material Green hue, tuned for a dark canvas. */
+  --brand:          #4caf50;
+  --brand-hover:    #66bb6a;   /* lighten on hover against dark */
+  --brand-active:   #43a047;
+  --brand-soft:     rgb(76 175 80 / 0.15);   /* soft fill on dark */
+  --brand-contrast: #ffffff;
+  --brand-ring:     0 0 0 3px rgb(76 175 80 / 0.35);
+
+  /* State — brighter, cooler status green so brand != OK on dark. */
+  --ok:    #34d399;  --ok-soft:   rgb(52 211 153 / 0.14);  --ok-border:   rgb(52 211 153 / 0.35);  /* emerald-400 */
+  --warn:  #f0c674;  --warn-soft: rgb(240 198 116 / 0.14); --warn-border: rgb(240 198 116 / 0.35);
+  --err:   #ff5c5c;  --err-soft:  rgb(255 92 92 / 0.14);   --err-border:  rgb(255 92 92 / 0.35);
+  --info:  #39d2c0;  --info-soft: rgb(57 210 192 / 0.14);  --info-border: rgb(57 210 192 / 0.35);  /* teal heritage */
+
+  /* Surfaces — GitHub-dark canvas / surface / raised. */
+  --bg:              #0d1117;
+  --surface:         #161b22;
+  --surface-raised:  #1f242c;
+
+  /* Text — GitHub-dark three tiers. */
+  --text:            #e6edf3;
+  --text-secondary:  #7d8590;
+  --text-tertiary:   #6e7681;
+
+  /* Borders. */
+  --border:          #30363d;
+  --border-light:    #21262d;
+  --border-strong:   #484f58;
+
+  /* Shadows — subtle on dark; elevation is mostly border + faint depth. */
+  --shadow-xs:  0 1px 2px 0 rgb(1 4 9 / 0.30);
+  --shadow-sm:  0 1px 2px 0 rgb(1 4 9 / 0.30), 0 1px 3px 0 rgb(1 4 9 / 0.40);
+  --shadow-md:  0 2px 4px -1px rgb(1 4 9 / 0.40), 0 4px 8px -2px rgb(1 4 9 / 0.50);
+  --shadow-lg:  0 4px 6px -2px rgb(1 4 9 / 0.40), 0 12px 24px -6px rgb(1 4 9 / 0.55);
+  --shadow-xl:  0 8px 16px -4px rgb(1 4 9 / 0.45), 0 24px 48px -12px rgb(1 4 9 / 0.60);
+  --shadow-inset: inset 0 1px 2px 0 rgb(1 4 9 / 0.50);
+}

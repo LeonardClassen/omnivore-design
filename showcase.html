@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en" data-theme="light-cloud">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Omnivore Design System</title>
+<link rel="stylesheet" href="tokens.css" />
+<link rel="stylesheet" href="components.css" />
+<style>
+  @import url("https://rsms.me/inter/inter.css");
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text);
+    font-size: var(--fs-base);
+    line-height: var(--lh-base);
+    -webkit-font-smoothing: antialiased;
+    transition: background var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out);
+  }
+
+  /* ---- Page chrome ---- */
+  .topbar {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 14px 28px;
+    background: color-mix(in srgb, var(--surface) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .brandmark { display: flex; align-items: center; gap: 12px; }
+  .brand-dot { width: 26px; height: 26px; border-radius: 8px; background: var(--brand); display: grid; place-items: center; color: var(--brand-contrast); font-weight: 700; font-size: 15px; }
+  .brand-name { font-weight: var(--fw-semibold); font-size: 15px; letter-spacing: -0.01em; }
+  .brand-sub { font-size: 12px; color: var(--text-tertiary); }
+
+  .seg { display: inline-flex; background: var(--surface-raised); border: 1px solid var(--border); border-radius: var(--radius-full); padding: 3px; }
+  .seg button {
+    border: 0; background: transparent; cursor: pointer;
+    font: inherit; font-size: 13px; font-weight: var(--fw-medium); color: var(--text-secondary);
+    padding: 6px 14px; border-radius: var(--radius-full);
+    transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+  }
+  .seg button.is-active { background: var(--surface); color: var(--text); box-shadow: var(--shadow-sm); }
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 40px 28px 96px; }
+  .hero-h1 { font-size: var(--fs-2xl); line-height: var(--lh-2xl); font-weight: var(--fw-bold); letter-spacing: -0.02em; margin: 0 0 8px; }
+  .hero-p  { font-size: var(--fs-md); color: var(--text-secondary); max-width: 62ch; margin: 0; }
+
+  section.block { margin-top: 56px; }
+  .block-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; }
+  .block-head h2 { font-size: var(--fs-lg); font-weight: var(--fw-semibold); margin: 0; letter-spacing: -0.01em; }
+  .block-head .num { font-family: var(--font-mono); font-size: 12px; color: var(--brand); }
+  .block-sub { font-size: 13px; color: var(--text-secondary); margin: 0 0 22px; max-width: 68ch; }
+
+  .grid { display: grid; gap: 14px; }
+  .g-swatch { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
+  .g-cards  { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 24px; box-shadow: var(--shadow-sm); }
+  .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .col { display: flex; flex-direction: column; gap: 12px; }
+  .stack-sm { display: flex; flex-direction: column; gap: 8px; }
+
+  /* ---- Swatches ---- */
+  .swatch { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; background: var(--surface); }
+  .swatch .chip { height: 62px; }
+  .swatch .meta { padding: 10px 12px; }
+  .swatch .nm { font-size: 13px; font-weight: var(--fw-semibold); }
+  .swatch .vr { font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary); }
+  .swatch .vl { font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary); }
+
+  /* ---- Two-green teaching panel ---- */
+  .twogreen { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 720px) { .twogreen { grid-template-columns: 1fr; } }
+  .tg-card { border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px; }
+  .tg-swatch { height: 54px; border-radius: var(--radius-md); margin-bottom: 12px; }
+  .tg-role { font-size: 11px; font-weight: 700; letter-spacing: var(--tracking-caps); text-transform: uppercase; }
+  .tg-name { font-weight: var(--fw-semibold); margin: 2px 0 4px; }
+  .tg-use  { font-size: 13px; color: var(--text-secondary); }
+  .rule { display: flex; gap: 10px; align-items: flex-start; margin-top: 16px; padding: 12px 14px; border-radius: var(--radius-md); background: var(--surface-raised); font-size: 13px; color: var(--text-secondary); }
+  .dodont { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+  .dd { border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px; }
+  .dd .tag { font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 10px; display: inline-flex; align-items: center; gap: 6px; }
+  .dd.good .tag { color: var(--ok); }
+  .dd.bad  .tag { color: var(--err); }
+
+  /* ---- Scale demos ---- */
+  .spacebar { height: 14px; background: var(--brand); border-radius: 3px; }
+  .radiobox { width: 84px; height: 60px; background: var(--brand-soft); border: 1.5px solid var(--brand); display: grid; place-items: end center; padding-bottom: 6px; font-family: var(--font-mono); font-size: 11px; color: var(--brand-active); }
+  .shadowbox { height: 84px; background: var(--surface); border: 1px solid var(--border-light); border-radius: var(--radius-lg); display: grid; place-items: center; font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary); }
+
+  .type-row { display: flex; align-items: baseline; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--border-light); }
+  .type-row .tag { font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary); width: 78px; flex: 0 0 auto; }
+
+  .lbl { font-size: 11px; font-weight: 700; letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 10px; }
+
+  footer.foot { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--text-secondary); font-size: 13px; }
+  footer.foot code { font-family: var(--font-mono); font-size: 12px; background: var(--surface-raised); padding: 2px 6px; border-radius: 4px; color: var(--text); }
+  footer.foot pre { font-family: var(--font-mono); font-size: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px 16px; overflow-x: auto; color: var(--text); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brandmark">
+    <div class="brand-dot">O</div>
+    <div>
+      <div class="brand-name">Omnivore Design System</div>
+      <div class="brand-sub">one token layer · two surfaces</div>
+    </div>
+  </div>
+  <div class="seg" id="themeSeg">
+    <button data-theme-btn="light-cloud" class="is-active">Light · Cloud</button>
+    <button data-theme-btn="dark-industrial">Dark · Industrial</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <h1 class="hero-h1">One brand, two surfaces.</h1>
+  <p class="hero-p">
+    A single framework-neutral token layer (<span class="omv-mono">tokens.css</span>) drives both the
+    customer-ops <strong>cloud dashboard</strong> (light) and the industrial <strong>HMI</strong> on the WAGO panel (dark).
+    Flip the switch above — every swatch and component below re-themes from the same tokens.
+    Nothing here is hard-coded.
+  </p>
+
+  <!-- ===================== BRAND / TWO-GREEN ===================== -->
+  <section class="block">
+    <div class="block-head"><span class="num">01</span><h2>Brand &amp; the two greens</h2></div>
+    <p class="block-sub">Green is the one company accent. But a green button must never read as an "OK" status
+      on the dark panel — so brand and status are <strong>two different green tokens</strong>, split by role.</p>
+
+    <div class="panel">
+      <div class="twogreen">
+        <div class="tg-card">
+          <div class="tg-swatch" style="background: var(--brand)"></div>
+          <div class="tg-role" style="color: var(--brand-active)">Interactive</div>
+          <div class="tg-name"><span class="omv-mono">--brand</span></div>
+          <div class="tg-use">Primary CTAs · focus rings · selected/active · links · brand marks. Never status.</div>
+        </div>
+        <div class="tg-card">
+          <div class="tg-swatch" style="background: var(--ok)"></div>
+          <div class="tg-role" style="color: var(--ok)">Status</div>
+          <div class="tg-name"><span class="omv-mono">--ok</span></div>
+          <div class="tg-use">"Running / healthy / present" — LEDs and status pills only. Never interaction.</div>
+        </div>
+      </div>
+
+      <div class="rule">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;margin-top:1px"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        <span>Warm brand-green vs cool status-emerald are deliberately distinct hues. On the dark theme the gap widens
+          (brand <span class="omv-mono">#4caf50</span> · ok <span class="omv-mono">#34d399</span>) so the two never blur together.</span>
+      </div>
+
+      <div class="dodont">
+        <div class="dd good">
+          <span class="tag">✓ Correct</span>
+          <div class="row">
+            <button class="omv-btn omv-btn-primary omv-btn-sm">Approve</button>
+            <span class="omv-led"><span class="omv-led-dot is-ok"></span>Operational</span>
+          </div>
+        </div>
+        <div class="dd bad">
+          <span class="tag">✕ Wrong</span>
+          <div class="row">
+            <button class="omv-btn omv-btn-sm" style="background: var(--ok); color:#062b1e">Approve</button>
+            <span class="omv-led"><span class="omv-led-dot" style="background: var(--brand); box-shadow:0 0 7px color-mix(in srgb, var(--brand) 65%, transparent)"></span>Operational</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== COLOR TOKENS ===================== -->
+  <section class="block">
+    <div class="block-head"><span class="num">02</span><h2>Color tokens</h2></div>
+    <p class="block-sub">Semantic roles. Values swap per theme; names never do.</p>
+
+    <div class="lbl">Brand</div>
+    <div class="grid g-swatch" id="sw-brand"></div>
+    <div class="lbl" style="margin-top:22px">State — reserved for status meaning</div>
+    <div class="grid g-swatch" id="sw-state"></div>
+    <div class="lbl" style="margin-top:22px">Surfaces &amp; text</div>
+    <div class="grid g-swatch" id="sw-surface"></div>
+    <div class="lbl" style="margin-top:22px">Borders</div>
+    <div class="grid g-swatch" id="sw-border"></div>
+  </section>
+
+  <!-- ===================== TYPOGRAPHY ===================== -->
+  <section class="block">
+    <div class="block-head"><span class="num">03</span><h2>Typography</h2></div>
+    <p class="block-sub">Inter for UI, JetBrains Mono for serials, codes and live numbers.</p>
+    <div class="panel">
+      <div class="type-row"><span class="tag">h1 · 30</span><span class="omv-h1">Feedlot overview</span></div>
+      <div class="type-row"><span class="tag">h2 · 24</span><span class="omv-h2">Container lifecycle</span></div>
+      <div class="type-row"><span class="tag">h3 · 18</span><span class="omv-h3">Commissioning wizard</span></div>
+      <div class="type-row"><span class="tag">body · 14</span><span class="omv-body">The quick brown fox feeds the larvae over the lazy dog.</span></div>
+      <div class="type-row"><span class="tag">meta · 13</span><span class="omv-meta">Last sync 2 minutes ago · node PFC300</span></div>
+      <div class="type-row"><span class="tag">caption · 12</span><span class="omv-caption">Read-only telemetry, updated at 1 Hz</span></div>
+      <div class="type-row"><span class="tag">eyebrow</span><span class="omv-eyebrow">Section label</span></div>
+      <div class="type-row" style="border-bottom:0"><span class="tag">mono</span><span class="omv-mono">SN-OMV-000241 · %IW9 · 42.7&nbsp;kg</span></div>
+    </div>
+  </section>
+
+  <!-- ===================== SPACING / RADII / SHADOW ===================== -->
+  <section class="block">
+    <div class="block-head"><span class="num">04</span><h2>Spacing · radii · elevation</h2></div>
+    <p class="block-sub">A 4px spacing grid, a 6–20px radius ramp, and multi-layer low-opacity shadows.</p>
+    <div class="panel col" style="gap:28px">
+      <div>
+        <div class="lbl">Spacing — 4px grid</div>
+        <div class="col" id="spaceScale" style="gap:8px"></div>
+      </div>
+      <div>
+        <div class="lbl">Radii</div>
+        <div class="row" id="radiiScale"></div>
+      </div>
+      <div>
+        <div class="lbl">Elevation</div>
+        <div class="grid g-cards" id="shadowScale"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== COMPONENTS ===================== -->
+  <section class="block">
+    <div class="block-head"><span class="num">05</span><h2>Components</h2></div>
+    <p class="block-sub">The reference layer. Each surface re-implements these natively — this is the visual contract.</p>
+
+    <div class="grid g-cards" style="grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); align-items: start">
+
+      <div class="omv-card" style="padding:20px">
+        <div class="omv-card-header"><div class="omv-card-title">Buttons</div></div>
+        <div class="col">
+          <div class="row">
+            <button class="omv-btn omv-btn-primary">Primary</button>
+            <button class="omv-btn omv-btn-secondary">Secondary</button>
+            <button class="omv-btn omv-btn-ghost">Ghost</button>
+          </div>
+          <div class="row">
+            <button class="omv-btn omv-btn-danger">Delete</button>
+            <button class="omv-btn omv-btn-dangerSoft">Cancel job</button>
+            <button class="omv-btn omv-btn-primary" disabled>Disabled</button>
+          </div>
+          <div class="row">
+            <button class="omv-btn omv-btn-primary omv-btn-sm">Small</button>
+            <button class="omv-btn omv-btn-primary omv-btn-md">Medium</button>
+            <button class="omv-btn omv-btn-primary omv-btn-lg">Large</button>
+            <button class="omv-iconbtn" title="More"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="omv-card" style="padding:20px">
+        <div class="omv-card-header"><div class="omv-card-title">Inputs</div></div>
+        <div class="col">
+          <label class="omv-field">
+            <span class="omv-field-label">Search containers</span>
+            <span class="omv-input-wrap has-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+              <input class="omv-input" placeholder="Serial or site…" />
+            </span>
+          </label>
+          <label class="omv-field">
+            <span class="omv-field-label">Site</span>
+            <span class="omv-input-wrap">
+              <select class="omv-input"><option>Aachen West</option><option>Düren Nord</option></select>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" style="position:absolute;right:10px;pointer-events:none;color:var(--text-tertiary)"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </label>
+          <label class="omv-field">
+            <span class="omv-field-label">Weight target</span>
+            <span class="omv-input-wrap is-error"><input class="omv-input" value="—12" /></span>
+            <span class="omv-field-error">Must be a positive number.</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="omv-card" style="padding:20px">
+        <div class="omv-card-header"><div class="omv-card-title">Badges &amp; status</div></div>
+        <div class="col">
+          <div class="row">
+            <span class="omv-badge omv-badge-primary"><span class="omv-badge-dot"></span>Commissioned</span>
+            <span class="omv-badge omv-badge-ok"><span class="omv-badge-dot"></span>Operational</span>
+            <span class="omv-badge omv-badge-warn"><span class="omv-badge-dot"></span>Installed</span>
+          </div>
+          <div class="row">
+            <span class="omv-badge omv-badge-danger"><span class="omv-badge-dot"></span>Fault</span>
+            <span class="omv-badge omv-badge-info"><span class="omv-badge-dot"></span>In logistics</span>
+            <span class="omv-badge omv-badge-neutral">Retired</span>
+          </div>
+          <div class="row" style="gap:18px;margin-top:4px">
+            <span class="omv-led"><span class="omv-led-dot is-ok"></span>Pump A</span>
+            <span class="omv-led"><span class="omv-led-dot is-warn"></span>Gripper</span>
+            <span class="omv-led"><span class="omv-led-dot is-err"></span>Axis Z</span>
+            <span class="omv-led"><span class="omv-led-dot"></span>Idle</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="omv-card" style="padding:20px">
+        <div class="omv-card-header"><div class="omv-card-title">Banners</div></div>
+        <div class="col">
+          <div class="omv-banner omv-banner-ok"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><div class="omv-banner-title">Batch complete</div>6 trays filled and weighed.</div></div>
+          <div class="omv-banner omv-banner-warning"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 4a2 2 0 0 1 3.4 0l8 14a2 2 0 0 1-1.7 3H4a2 2 0 0 1-1.7-3z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg><div><div class="omv-banner-title">Axes not synced</div>Home the gantry before manual moves.</div></div>
+          <div class="omv-banner omv-banner-danger"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><div><div class="omv-banner-title">Gripper fault 504</div>Harvest halted at slot B4.</div></div>
+          <div class="omv-banner omv-banner-info"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><div><div class="omv-banner-title">New firmware</div>PLC update staged for next flash.</div></div>
+        </div>
+      </div>
+
+      <div class="omv-card" style="padding:20px">
+        <div class="omv-card-header"><div class="omv-card-title">Progress &amp; tabs</div></div>
+        <div class="col" style="gap:16px">
+          <div class="stack-sm"><span class="omv-meta">Fill batch · 68%</span><div class="omv-progress"><div class="omv-progress-bar omv-progress-primary" style="width:68%"></div></div></div>
+          <div class="stack-sm"><span class="omv-meta">Buffer · 40%</span><div class="omv-progress"><div class="omv-progress-bar omv-progress-info" style="width:40%"></div></div></div>
+          <div class="omv-tabs"><button class="omv-tab is-active">Overview</button><button class="omv-tab">Jobs</button><button class="omv-tab">Events</button></div>
+        </div>
+      </div>
+
+      <div class="omv-card" style="padding:20px">
+        <div class="omv-card-header"><div class="omv-card-title">People</div></div>
+        <div class="col">
+          <div class="row" style="gap:14px">
+            <span class="omv-avatar" style="width:40px;height:40px;font-size:15px">LC</span>
+            <div class="omv-kv"><span class="omv-kv-label">Operator</span><span class="omv-kv-value">Leonard Classen</span></div>
+          </div>
+          <div class="row" style="gap:24px">
+            <div class="omv-kv"><span class="omv-kv-label">Serial</span><span class="omv-kv-value omv-mono">SN-OMV-000241</span></div>
+            <div class="omv-kv"><span class="omv-kv-label">Uptime</span><span class="omv-kv-value omv-mono">18d 4h</span></div>
+          </div>
+          <div class="stack-sm">
+            <span class="omv-kv-label">Loading…</span>
+            <div class="omv-skeleton" style="height:12px;width:80%"></div>
+            <div class="omv-skeleton" style="height:12px;width:55%"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Stepper full width -->
+    <div class="omv-card" style="padding:24px 28px;margin-top:14px">
+      <div class="lbl">Container lifecycle</div>
+      <div class="omv-stepper">
+        <div class="omv-step"><div class="omv-step-inner"><div class="omv-step-dot is-past"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div class="omv-step-label"><div>Manufactured</div><div class="omv-step-sublabel">Hergestellt</div></div></div><div class="omv-step-line is-past"></div></div>
+        <div class="omv-step"><div class="omv-step-inner"><div class="omv-step-dot is-past"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div class="omv-step-label"><div>In logistics</div><div class="omv-step-sublabel">Im Versand</div></div></div><div class="omv-step-line is-past"></div></div>
+        <div class="omv-step"><div class="omv-step-inner"><div class="omv-step-dot is-current">3</div><div class="omv-step-label is-current"><div>Installed</div><div class="omv-step-sublabel">Installiert</div></div></div><div class="omv-step-line"></div></div>
+        <div class="omv-step"><div class="omv-step-inner"><div class="omv-step-dot">4</div><div class="omv-step-label"><div>Commissioned</div><div class="omv-step-sublabel">Abgenommen</div></div></div><div class="omv-step-line"></div></div>
+        <div class="omv-step"><div class="omv-step-inner"><div class="omv-step-dot">5</div><div class="omv-step-label"><div>Operational</div><div class="omv-step-sublabel">Betrieb</div></div></div><div class="omv-step-line"></div></div>
+        <div class="omv-step"><div class="omv-step-inner"><div class="omv-step-dot">6</div><div class="omv-step-label"><div>Retired</div><div class="omv-step-sublabel">Stillgelegt</div></div></div></div>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top:14px">
+      <button class="omv-btn omv-btn-primary" id="openModal">Open modal</button>
+      <span class="omv-meta">Real Escape / scrim-close behaviour.</span>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <strong style="color:var(--text)">Consume it as a git submodule.</strong> One source of truth, pinned per app.
+    <pre>git submodule add &lt;omnivore-design-url&gt; vendor/omnivore-design
+# then link the tokens:
+&lt;link rel="stylesheet" href="vendor/omnivore-design/tokens.css"&gt;
+# HMI (Tailwind): map keys to the vars, e.g. colors: { brand: "var(--brand)", ok: "var(--ok)" }</pre>
+    <div style="margin-top:12px">Omnivore Design System · v0.1.0 · <code>tokens.css</code> + <code>components.css</code> are the API — this page is just the mirror.</div>
+  </footer>
+</div>
+
+<!-- Modal -->
+<div class="omv-modal-scrim" id="modalScrim" style="display:none">
+  <div class="omv-modal">
+    <div class="omv-modal-header">
+      <div class="omv-modal-title">Retire container SN-OMV-000241?</div>
+      <button class="omv-iconbtn" id="closeModal" title="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="omv-modal-body">This moves the container to <em>Retired</em> and stops all telemetry ingestion. You can re-commission it later.</div>
+    <div class="omv-modal-footer">
+      <button class="omv-btn omv-btn-secondary" id="closeModal2">Cancel</button>
+      <button class="omv-btn omv-btn-danger">Retire</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* ---- Theme toggle ---- */
+  const root = document.documentElement;
+  const seg = document.getElementById("themeSeg");
+  seg.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-theme-btn]");
+    if (!btn) return;
+    root.setAttribute("data-theme", btn.dataset.themeBtn);
+    seg.querySelectorAll("button").forEach(b => b.classList.toggle("is-active", b === btn));
+    paintValues();
+  });
+
+  /* ---- Swatch generation ---- */
+  const SW = {
+    "sw-brand": [
+      ["--brand", "brand"], ["--brand-hover", "brand-hover"], ["--brand-active", "brand-active"],
+      ["--brand-soft", "brand-soft"], ["--brand-contrast", "brand-contrast"],
+    ],
+    "sw-state": [
+      ["--ok", "ok"], ["--warn", "warn"], ["--err", "err"], ["--info", "info"],
+      ["--ok-soft", "ok-soft"], ["--warn-soft", "warn-soft"], ["--err-soft", "err-soft"], ["--info-soft", "info-soft"],
+    ],
+    "sw-surface": [
+      ["--bg", "bg (canvas)"], ["--surface", "surface"], ["--surface-raised", "surface-raised"],
+      ["--text", "text"], ["--text-secondary", "text-secondary"], ["--text-tertiary", "text-tertiary"],
+    ],
+    "sw-border": [
+      ["--border", "border"], ["--border-light", "border-light"], ["--border-strong", "border-strong"],
+    ],
+  };
+  for (const [id, list] of Object.entries(SW)) {
+    const host = document.getElementById(id);
+    host.innerHTML = list.map(([v, nm]) => `
+      <div class="swatch">
+        <div class="chip" style="background: var(${v})"></div>
+        <div class="meta">
+          <div class="nm">${nm}</div>
+          <div class="vr">var(${v})</div>
+          <div class="vl" data-token="${v}">—</div>
+        </div>
+      </div>`).join("");
+  }
+
+  function paintValues() {
+    const cs = getComputedStyle(root);
+    document.querySelectorAll("[data-token]").forEach(el => {
+      el.textContent = cs.getPropertyValue(el.dataset.token).trim() || "—";
+    });
+  }
+
+  /* ---- Spacing scale ---- */
+  const spaces = [["--space-1","4"],["--space-2","8"],["--space-3","12"],["--space-4","16"],["--space-6","24"],["--space-8","32"],["--space-12","48"],["--space-16","64"]];
+  document.getElementById("spaceScale").innerHTML = spaces.map(([v,n]) => `
+    <div class="row" style="gap:14px">
+      <span class="omv-mono" style="width:88px;color:var(--text-secondary);font-size:12px">${v.replace("--","")}</span>
+      <div class="spacebar" style="width: var(${v})"></div>
+      <span class="omv-mono" style="font-size:12px;color:var(--text-tertiary)">${n}px</span>
+    </div>`).join("");
+
+  /* ---- Radii ---- */
+  const radii = [["--radius-sm","sm"],["--radius-md","md"],["--radius-lg","lg"],["--radius-xl","xl"],["--radius-2xl","2xl"]];
+  document.getElementById("radiiScale").innerHTML = radii.map(([v,n]) => `
+    <div class="radiobox" style="border-radius: var(${v})">${n}</div>`).join("");
+
+  /* ---- Shadows ---- */
+  const shadows = [["--shadow-sm","sm"],["--shadow-md","md"],["--shadow-lg","lg"],["--shadow-xl","xl"]];
+  document.getElementById("shadowScale").innerHTML = shadows.map(([v,n]) => `
+    <div class="shadowbox" style="box-shadow: var(${v})">${n}</div>`).join("");
+
+  /* ---- Modal ---- */
+  const scrim = document.getElementById("modalScrim");
+  const open = () => scrim.style.display = "flex";
+  const close = () => scrim.style.display = "none";
+  document.getElementById("openModal").addEventListener("click", open);
+  document.getElementById("closeModal").addEventListener("click", close);
+  document.getElementById("closeModal2").addEventListener("click", close);
+  scrim.addEventListener("mousedown", (e) => { if (e.target === scrim) close(); });
+  window.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
+
+  paintValues();
+</script>
+</body>
+</html>
