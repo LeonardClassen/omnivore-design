@@ -1,0 +1,29 @@
+{
+  "name": "@omnivore/design",
+  "version": "0.2.0",
+  "description": "Omnivore Design System — shared CSS tokens + React primitive library, two surfaces (light-cloud / dark-industrial).",
+  "type": "module",
+  "license": "UNLICENSED",
+  "files": [
+    "tokens.css",
+    "components.css",
+    "ui",
+    "showcase.html"
+  ],
+  "exports": {
+    "./tokens.css": "./tokens.css",
+    "./components.css": "./components.css",
+    "./ui": "./ui/src/index.ts"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.0",
+    "react": "^18.3.1",
+    "typescript": "^5.4.0"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  }
+}

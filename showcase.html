@@ -359,6 +359,51 @@
     </div>
   </section>
 
+  <!-- ===================== HMI PRIMITIVES ===================== -->
+  <section class="block">
+    <div class="block-head"><span class="num">06</span><h2>HMI-Primitive · Industrial Glass</h2></div>
+    <p class="block-sub">Die React-Lib in <span class="omv-mono">ui/</span> (Btn · Card · Stat · Led · Empty), 1:1 aus der HMI extrahiert.
+      Auf <strong>Dark · Industrial</strong> umschalten für den echten Panel-Look — Primary wird ruhig (Soft-Accent), Targets touch-groß, Card-Titel mono-uppercase.</p>
+
+    <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); align-items: start; gap:14px">
+
+      <section class="omv-card omv-card-panel">
+        <header class="omv-card-header"><h2 class="omv-card-title">Achse Z</h2><span class="omv-led"><span class="omv-led-dot is-ok"></span>bereit</span></header>
+        <div class="omv-card-body">
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px">
+            <div class="omv-stat"><div class="omv-stat-label">Position</div><div class="omv-stat-row"><span class="omv-stat-value">412.7</span><span class="omv-stat-unit">mm</span></div><div class="omv-stat-hint">Ziel 415.0</div></div>
+            <div class="omv-stat"><div class="omv-stat-label">Last</div><div class="omv-stat-row"><span class="omv-stat-value is-ok">42.1</span><span class="omv-stat-unit">kg</span></div></div>
+            <div class="omv-stat"><div class="omv-stat-label">Temp</div><div class="omv-stat-row"><span class="omv-stat-value is-warn">61</span><span class="omv-stat-unit">&deg;C</span></div></div>
+            <div class="omv-stat"><div class="omv-stat-label">Fehler</div><div class="omv-stat-row"><span class="omv-stat-value is-err">504</span></div><div class="omv-stat-hint">Greifer-Fault</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="omv-card omv-card-panel">
+        <header class="omv-card-header"><h2 class="omv-card-title">Aktoren</h2></header>
+        <div class="omv-card-body" style="display:flex; flex-direction:column; gap:14px">
+          <div class="row" style="gap:18px">
+            <span class="omv-led"><span class="omv-led-dot is-ok"></span>Pump A</span>
+            <span class="omv-led"><span class="omv-led-dot is-ok"></span>Pump B</span>
+            <span class="omv-led"><span class="omv-led-dot"></span>Greifer</span>
+          </div>
+          <div class="row">
+            <button class="omv-btn omv-btn-primary omv-btn-md">Start</button>
+            <button class="omv-btn omv-btn-secondary omv-btn-md">Home</button>
+            <button class="omv-btn omv-btn-danger omv-btn-md">Stop</button>
+            <button class="omv-btn omv-btn-ghost omv-btn-md">Reset</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="omv-card omv-card-panel">
+        <header class="omv-card-header"><h2 class="omv-card-title">Jobs</h2></header>
+        <div class="omv-card-body"><div class="omv-empty">Keine aktiven Jobs</div></div>
+      </section>
+
+    </div>
+  </section>
+
   <footer class="foot">
     <strong style="color:var(--text)">Consume it as a git submodule.</strong> One source of truth, pinned per app.
     <pre>git submodule add &lt;omnivore-design-url&gt; vendor/omnivore-design

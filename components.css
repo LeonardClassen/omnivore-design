@@ -235,3 +235,60 @@ select.omv-input { padding-right: 32px; appearance: none; }
 .omv-modal-title { font-size: 16px; font-weight: var(--fw-semibold); color: var(--text); }
 .omv-modal-body { padding: 18px 20px; overflow-y: auto; color: var(--text); }
 .omv-modal-footer { padding: 14px 20px; border-top: 1px solid var(--border-light); display: flex; justify-content: flex-end; gap: 8px; }
+
+/* =========================================================================
+   HMI PRIMITIVES (Industrial Glass) — the React lib in ui/ applies these.
+   Ported 1:1 from the HMI's ui.tsx (Card/Stat/Btn/Led/Empty), token-driven.
+   ========================================================================= */
+
+/* ---- Card as a bordered panel (HMI look) --------------------------------- */
+.omv-card-panel { padding: 0; }
+.omv-card-panel > .omv-card-header { margin: 0; padding: 10px 14px; border-bottom: 1px solid var(--border); align-items: center; }
+.omv-card-panel > .omv-card-body { padding: 14px; }
+
+/* ---- Stat (label + big mono value + optional unit/hint) ------------------ */
+.omv-stat { display: flex; flex-direction: column; gap: 2px; }
+.omv-stat-label { font-size: 10px; font-weight: var(--fw-medium); text-transform: uppercase; letter-spacing: var(--tracking-caps); color: var(--text-tertiary); }
+.omv-stat-row { display: flex; align-items: baseline; gap: 4px; }
+.omv-stat-value { font-family: var(--font-mono); font-size: 24px; font-feature-settings: "tnum"; line-height: 1.1; color: var(--text); }
+.omv-stat-value.is-ok   { color: var(--ok); }
+.omv-stat-value.is-warn { color: var(--warn); }
+.omv-stat-value.is-err  { color: var(--err); }
+.omv-stat-unit { font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary); }
+.omv-stat-hint { font-size: 11px; color: var(--text-tertiary); }
+
+/* ---- Empty (placeholder) ------------------------------------------------- */
+.omv-empty { display: flex; min-height: 200px; align-items: center; justify-content: center; font-size: 14px; color: var(--text-tertiary); text-align: center; }
+
+/* =========================================================================
+   THEME-AWARE ERGONOMICS — same component, surface-appropriate treatment.
+   Where the two surfaces genuinely diverge, the dark-industrial panel gets
+   the calm/touch variant; light-cloud keeps the marketing/mouse variant.
+   ========================================================================= */
+[data-theme="dark-industrial"] .omv-btn    { min-height: var(--tap); }      /* gloved touch targets */
+[data-theme="dark-industrial"] .omv-btn-lg { min-height: var(--tap-lg); }
+
+/* Primary button: solid green on cloud (punch), calm soft-accent on the panel
+   (salience — a solid green fill would read too loud on a calm dark screen). */
+[data-theme="dark-industrial"] .omv-btn-primary {
+  background: var(--brand-soft);
+  color: var(--brand);
+  border-color: color-mix(in srgb, var(--brand) 55%, transparent);
+}
+[data-theme="dark-industrial"] .omv-btn-primary:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--brand) 22%, transparent);
+  border-color: var(--brand);
+}
+[data-theme="dark-industrial"] .omv-btn-primary:active:not(:disabled) {
+  background: color-mix(in srgb, var(--brand) 28%, transparent);
+}
+
+/* Card titles: semibold on cloud, tiny mono-uppercase label on the panel. */
+[data-theme="dark-industrial"] .omv-card-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: var(--fw-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--text-secondary);
+}
