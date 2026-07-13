@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useState } from "react";
-import { Gallery } from "./Gallery";
+import { Gallery, type Surface } from "./Gallery";
 import { Tokens } from "./Tokens";
 
 export type Theme = "light-cloud" | "dark-industrial";
@@ -28,6 +28,8 @@ export function App() {
     window.addEventListener("hashchange", onHash);
     return () => window.removeEventListener("hashchange", onHash);
   }, []);
+
+  const surface: Surface = theme === "dark-industrial" ? "hmi" : "cloud";
 
   return (
     <>
@@ -73,7 +75,7 @@ export function App() {
         </div>
       </header>
 
-      {route === "components" ? <Gallery /> : <Tokens theme={theme} />}
+      {route === "components" ? <Gallery surface={surface} /> : <Tokens theme={theme} />}
     </>
   );
 }
