@@ -16,7 +16,7 @@ customer-ops **cloud dashboard** (light) and the industrial **HMI** on the WAGO 
 |---|---|
 | [`tokens.css`](tokens.css) | **The token API.** Framework-neutral CSS custom properties: colors (2 theme maps), type, spacing, radii, shadows, motion. Consumable by *any* surface, even build-less via `<link>`. |
 | [`components.css`](components.css) | Component stylesheet — token-driven, theme-aware. The same class renders surface-appropriately per `[data-theme]`. |
-| [`ui/`](ui/) | **The React primitive library** (`Btn` · `Card` · `Stat` · `Led` · `Empty`, extracted 1:1 from the HMI). Thin `.tsx` wrappers over the `components.css` classes. |
+| [`ui/`](ui/) | **The React primitive library** — thin `.tsx` wrappers over the `components.css` classes: HMI/layout (`Card` · `Stat` · `Led` · `Empty`), controls (`Btn` · `Modal` · `Select` · `Field` · `Input`), status (`Badge` · `Banner` · `Progress`), structure/data (`Table` · `Tabs` · `Stepper` · `KV` · `Avatar` · `Skeleton` · `RadioCard`). `Card`/`Stat`/`Btn`/`Led`/`Empty` are extracted 1:1 from the HMI. |
 | [`showcase.html`](showcase.html) | Living gallery — tokens + components in both themes. Show this to teammates. |
 
 **Scope: shared tokens + a React primitive library.** `tokens.css` is framework-neutral and
@@ -53,6 +53,17 @@ import { Btn, Card, Stat, Led, Empty } from "@omnivore/design/ui";
 ```
 
 `react` is a peer dependency (the consumer provides it). The lib is dependency-free otherwise.
+
+## Interactive primitives — hand-rolled, zero-dependency
+
+`Modal` and `Select` are hand-rolled, **not** pulled from a headless UI kit (Radix et al.). The
+HMI is a **keyboard-less touch kiosk**: the `omv-modal-scrim` already blocks background touches, so
+a heavy focus-trap buys nothing here — the honest wins (consistent Escape / scrim-close, an
+accessible native select) are only a few lines each. `Modal` renders inline (a `position: fixed`
+scrim, no `react-dom` portal) and `Select` is a styled **native** `<select>` (the OS picker is the
+best touch affordance). So the lib's only peer dependency stays `react`. If a heavier a11y need
+ever appears (e.g. a permanent maintenance keyboard), swapping in a headless kit is a lib-local
+change no consumer import sees.
 
 ## The two-green rule (read before touching greens)
 

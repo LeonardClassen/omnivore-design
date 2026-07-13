@@ -86,7 +86,8 @@
 }
 .omv-input-wrap.has-icon .omv-input { padding-left: 32px; }
 .omv-input::placeholder { color: var(--text-tertiary); }
-select.omv-input { padding-right: 32px; appearance: none; }
+select.omv-input { padding-right: 32px; appearance: none; cursor: pointer; }
+.omv-input-wrap > .omv-select-chevron { position: absolute; right: 10px; pointer-events: none; color: var(--text-tertiary); }
 
 /* ---- Badge --------------------------------------------------------------- */
 .omv-badge {
