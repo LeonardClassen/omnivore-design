@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import {
   Btn,
   Card,
@@ -20,8 +20,6 @@ import {
   Table,
   Stepper,
 } from "../ui/src/index";
-
-type Theme = "light-cloud" | "dark-industrial";
 
 // Small layout helpers (gallery chrome only — not part of the library).
 function Section({ title, children }: { title: string; children: ReactNode }) {
@@ -79,16 +77,11 @@ const STEPS = [
 ];
 
 export function Gallery() {
-  const [theme, setTheme] = useState<Theme>("dark-industrial");
   const [modalOpen, setModalOpen] = useState(false);
   const [site, setSite] = useState("aachen");
   const [tab, setTab] = useState("overview");
   const [plan, setPlan] = useState("balanced");
   const [search, setSearch] = useState("");
-
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-  }, [theme]);
 
   return (
     <div style={{ maxWidth: 1100, margin: "0 auto", padding: "32px 28px 96px" }}>
@@ -109,46 +102,7 @@ export function Gallery() {
             both themes. This is the live reference the HMI + cloud reuse.
           </p>
         </div>
-        <div className="omv-tabs" style={{ border: 0 }}>
-          <button
-            className={"omv-tab" + (theme === "light-cloud" ? " is-active" : "")}
-            onClick={() => setTheme("light-cloud")}
-          >
-            Light · Cloud
-          </button>
-          <button
-            className={"omv-tab" + (theme === "dark-industrial" ? " is-active" : "")}
-            onClick={() => setTheme("dark-industrial")}
-          >
-            Dark · Industrial
-          </button>
-        </div>
       </header>
-
-      {/* Token swatches */}
-      <Section title="Tokens · brand + state">
-        {[
-          ["--brand", "brand"],
-          ["--ok", "ok"],
-          ["--warn", "warn"],
-          ["--err", "err"],
-          ["--info", "info"],
-        ].map(([v, nm]) => (
-          <div key={v} style={{ width: 120 }}>
-            <div
-              style={{
-                height: 48,
-                borderRadius: "var(--radius-md)",
-                background: `var(${v})`,
-                border: "1px solid var(--border)",
-              }}
-            />
-            <div className="omv-mono" style={{ fontSize: 12, marginTop: 6 }}>
-              {nm}
-            </div>
-          </div>
-        ))}
-      </Section>
 
       {/* Buttons */}
       <Section title="Btn">

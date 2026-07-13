@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Omnivore Design — Component Gallery</title>
+<title>Omnivore Design System</title>
 <style>
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
@@ -16,6 +16,25 @@
     -webkit-font-smoothing: antialiased;
     transition: background var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out);
   }
+
+  /* ---- Shell chrome (gal-*): sticky topbar with brand · nav · theme ---- */
+  .gal-topbar {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    padding: 12px 28px;
+    background: color-mix(in srgb, var(--surface) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .gal-brand { display: flex; align-items: center; gap: 12px; margin-right: auto; }
+  .gal-brand-dot {
+    width: 28px; height: 28px; border-radius: 8px; background: var(--brand);
+    display: grid; place-items: center; color: var(--brand-contrast); font-weight: 700; font-size: 15px;
+  }
+  .gal-brand-name { font-weight: 600; font-size: 15px; letter-spacing: -0.01em; color: var(--text); }
+  .gal-brand-sub { font-size: 12px; color: var(--text-tertiary); }
+  /* nav + theme reuse .omv-tabs, but as topbar controls they carry no baseline */
+  .gal-nav.omv-tabs, .gal-theme.omv-tabs { border-bottom: 0; }
 </style>
 </head>
 <body>

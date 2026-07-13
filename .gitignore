@@ -5,6 +5,6 @@ Thumbs.db
 .idea/
 .vscode/
 
-# Nothing to build here (yet) — this repo ships raw CSS + one static HTML.
+# Vite gallery build output (published to Pages by .github/workflows/pages.yml).
 node_modules/
 dist/

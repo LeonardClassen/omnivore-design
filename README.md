@@ -4,9 +4,11 @@
 language — shared **CSS tokens** plus a **React primitive library** — consumed by both the
 customer-ops **cloud dashboard** (light) and the industrial **HMI** on the WAGO panel (dark).
 
-> Look first: open [`showcase.html`](showcase.html) in a browser and flip the
-> **Light · Cloud / Dark · Industrial** switch. Every swatch and component re-themes from the
-> same tokens — nothing is hard-coded.
+> **Look first:** open the live gallery at
+> **<https://leonardclassen.github.io/omnivore-design/>** and flip the
+> **Light · Cloud / Dark · Industrial** switch. Two pages — **Tokens** (the design truth, read
+> live from `tokens.css`) and **Components** (the real `ui/` React primitives) — both re-theme
+> from the same tokens; nothing is hard-coded. Run it locally with `npm install && npm run dev`.
 
 ---
 
@@ -17,7 +19,7 @@ customer-ops **cloud dashboard** (light) and the industrial **HMI** on the WAGO 
 | [`tokens.css`](tokens.css) | **The token API.** Framework-neutral CSS custom properties: colors (2 theme maps), type, spacing, radii, shadows, motion. Consumable by *any* surface, even build-less via `<link>`. |
 | [`components.css`](components.css) | Component stylesheet — token-driven, theme-aware. The same class renders surface-appropriately per `[data-theme]`. |
 | [`ui/`](ui/) | **The React primitive library** — thin `.tsx` wrappers over the `components.css` classes: HMI/layout (`Card` · `Stat` · `Led` · `Empty`), controls (`Btn` · `Modal` · `Select` · `Field` · `Input`), status (`Badge` · `Banner` · `Progress`), structure/data (`Table` · `Tabs` · `Stepper` · `KV` · `Avatar` · `Skeleton` · `RadioCard`). `Card`/`Stat`/`Btn`/`Led`/`Empty` are extracted 1:1 from the HMI. |
-| [`showcase.html`](showcase.html) | Living gallery — tokens + components in both themes. Show this to teammates. |
+| [`gallery/`](gallery/) | The Vite site published to GitHub Pages — a **Tokens** page (design truth, read live from `tokens.css`) + a **Components** page (the real `ui/` primitives), both themes. The living reference; show it to teammates. |
 
 **Scope: shared tokens + a React primitive library.** `tokens.css` is framework-neutral and
 consumable by any surface. The `ui/` components are consumed by build-based surfaces — the

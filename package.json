@@ -7,8 +7,7 @@
   "files": [
     "tokens.css",
     "components.css",
-    "ui",
-    "showcase.html"
+    "ui"
   ],
   "exports": {
     "./tokens.css": "./tokens.css",
