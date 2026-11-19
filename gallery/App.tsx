@@ -3,8 +3,7 @@ import { Gallery, type Surface } from "./Gallery";
 import { Tokens } from "./Tokens";
 import { Examples } from "./Examples";
 import { BRAND_CHOICES, applyBrand, contrastText } from "./brand";
-import flyDark from "../assets/logo/1zu1/fliege-dunkel-96.png";
-import flyLight from "../assets/logo/1zu1/fliege-hell-96.png";
+import { Fly } from "./Fly";
 
 export type Theme = "light-cloud" | "dark-industrial";
 type Route = "tokens" | "components" | "examples";
@@ -57,11 +56,7 @@ export function App() {
     <>
       <header className="gal-topbar">
         <div className="gal-brand">
-          <img
-            className={"gal-brand-logo" + (theme === "dark-industrial" ? " omv-fly-glow" : "")}
-            src={theme === "dark-industrial" ? flyDark : flyLight}
-            alt=""
-          />
+          <Fly height={36} dark={theme === "dark-industrial"} />
           <div>
             <div className="gal-brand-name">Omnivore Design System</div>
             <div className="gal-brand-sub">one token layer · two surfaces</div>

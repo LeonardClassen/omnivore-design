@@ -1,4 +1,4 @@
-// Brand-green candidates measured from the Glitzer-Fliege logo
+// Brand-green candidates: the official logo greens (V, R) and tones measured from the Glitzer-Fliege logo
 // (assets/logo/omnivore-glitzerfliege-app-icon.jpg, wing tiles, median per
 // lightness x hue band). Gallery-only: lets the operator pick the brand green
 // live on real screens before tokens.css is changed.
@@ -7,6 +7,9 @@ import type { Theme } from "./App";
 export type BrandChoice = { key: string; hex: string; label: string };
 
 export const BRAND_CHOICES: BrandChoice[] = [
+  // Official logo greens (assets/logo/flach): V6a delivery spec, later grass-green version.
+  { key: "V", hex: "#95c11f", label: "Logo V6a (Abgabe)" },
+  { key: "R", hex: "#57a639", label: "Logo RAL 6018" },
   { key: "A", hex: "#6fa66c", label: "Blattgrün mittel" },
   { key: "B", hex: "#88c580", label: "Blattgrün hell" },
   { key: "C", hex: "#aeea9b", label: "Blattgrün Glanz" },

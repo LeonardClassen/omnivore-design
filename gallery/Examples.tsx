@@ -21,10 +21,7 @@ import {
   Stepper,
 } from "../ui/src/index";
 import type { Theme } from "./App";
-// Cut-out fly, tightly cropped (assets/logo/1zu1/freistellen.py):
-// dark ground gets the colour-to-alpha cut + CSS glow, light ground the opaque one without glow.
-import flyDark from "../assets/logo/1zu1/fliege-dunkel-192.png";
-import flyLight from "../assets/logo/1zu1/fliege-hell-96.png";
+import { Fly } from "./Fly";
 
 // Clickable example screens: one per surface, built ONLY from ui/src
 // primitives plus a little layout glue (ex-* classes in index.html). Domain
@@ -77,7 +74,7 @@ function HmiExample() {
   return (
     <div className="ex-frame ex-hmi">
       <aside className="ex-rail">
-        <img className="ex-rail-logo omv-fly-glow" src={flyDark} alt="Omnivore" />
+        <span className="ex-rail-logo"><Fly height={76} dark /></span>
         {RAIL.map((r) => (
           <button
             key={r.id}
@@ -381,7 +378,7 @@ function CloudExample() {
   return (
     <div className="ex-frame ex-cloud">
       <header className="ex-cloud-top">
-        <img className="ex-cloud-logo" src={flyLight} alt="Omnivore" />
+        <Fly height={34} dark={false} />
         <strong>Omnivore</strong>
         <Tabs
           tabs={[

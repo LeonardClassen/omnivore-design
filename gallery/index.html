@@ -35,9 +35,6 @@
   .gal-brand-sub { font-size: 12px; color: var(--text-tertiary); }
   /* nav + theme reuse .omv-tabs, but as topbar controls they carry no baseline */
   .gal-nav.omv-tabs, .gal-theme.omv-tabs { border-bottom: 0; }
-  .gal-brand-logo { height: 36px; width: auto; display: block; }
-  /* the logo's own glow, in the brand green (dark ground only) */
-  .omv-fly-glow { filter: drop-shadow(0 0 4px color-mix(in srgb, var(--brand) 60%, transparent)) drop-shadow(0 0 12px color-mix(in srgb, var(--brand) 28%, transparent)); }
 
   /* ---- Brand-green picker (gallery-only, overrides --brand-* live) ---- */
   .gal-greenbar {
@@ -74,7 +71,7 @@
 
   .ex-hmi { display: flex; min-height: 620px; }
   .ex-rail { width: 120px; flex: none; background: var(--surface); border-right: 1px solid var(--border); padding: 12px 8px; display: flex; flex-direction: column; gap: 6px; }
-  .ex-rail-logo { height: 76px; width: auto; margin: 6px auto 16px; display: block; }
+  .ex-rail-logo { display: flex; justify-content: center; margin: 6px 0 16px; }
   .ex-rail-item {
     min-height: var(--tap, 48px); border-radius: var(--radius-md); font: inherit; font-size: 14px; cursor: pointer;
     background: transparent; color: var(--text-secondary); border: 1px solid transparent; text-align: left; padding: 0 12px;
@@ -104,7 +101,8 @@
     .ex-grid2 { grid-template-columns: minmax(0, 1fr); }
     .ex-hmi { flex-direction: column; }
     .ex-rail { width: auto; flex-direction: row; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--border); }
-    .ex-rail-logo { height: 44px; margin: 0 8px 0 4px; flex: none; }
+    .ex-rail-logo { margin: 0 8px 0 4px; flex: none; }
+    .ex-rail-logo img { height: 44px !important; }
     .ex-rail-item { flex: none; }
     .ex-cloud-top { flex-wrap: wrap; }
   }
