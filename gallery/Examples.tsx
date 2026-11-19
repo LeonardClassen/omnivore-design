@@ -245,7 +245,7 @@ function HmiRegal() {
             <KV label="Masttag" mono>{s.day} / 14</KV>
             <KV label="Letzte Fütterung" mono>heute 06:30</KV>
             <div style={{ margin: "14px 0" }}>
-              <Progress value={(s.day / 14) * 100} tone="info" />
+              <Progress value={(s.day / 14) * 100} />
             </div>
             <div className="ex-actions">
               <Btn variant="primary">Zur Waage</Btn>
