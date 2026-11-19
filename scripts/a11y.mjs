@@ -51,7 +51,54 @@ for (const [name, setup] of CASES) {
   for (const v of result) console.log(`     ${v.id} (${v.impact}) x${v.n}  ${v.sample}`);
 }
 
+// ---- Contract checks axe cannot see (WAI-ARIA APG patterns) ----------------
+const fails = [];
+const check = (ok, msg) => { console.log(`${ok ? "ok  " : "FAIL"} ${msg}`); if (!ok) fails.push(msg); };
+await page.goto(base + "#/examples");
+await page.reload(); // a hash change alone keeps the open modal from the last case
+await theme("Light · Cloud")(page);
+await page.waitForTimeout(250);
+
+const bars = await page.locator(".omv-progress").count();
+const barsOk = await page.locator('.omv-progress[role="progressbar"][aria-valuenow][aria-valuemin="0"][aria-valuemax="100"]').count();
+check(bars > 0 && bars === barsOk, `Progress exposes role=progressbar + value (${barsOk}/${bars})`);
+
+const tables = await page.locator(".omv-table").count();
+const tablesOk = await page.locator('.omv-table[role="table"]').count();
+const headers = await page.locator('.omv-table [role="columnheader"]').count();
+const cells = await page.locator('.omv-table [role="cell"]').count();
+check(tables > 0 && tables === tablesOk && headers > 0 && cells > 0, `Table exposes table/row/columnheader/cell roles (${tablesOk}/${tables}, ${headers} headers, ${cells} cells)`);
+
+const clickRows = page.locator('.omv-trow[tabindex="0"]');
+check((await clickRows.count()) > 0, `clickable table rows are keyboard-focusable (${await clickRows.count()})`);
+if (await clickRows.count()) {
+  await clickRows.nth(2).focus();
+  await page.keyboard.press("Enter");
+  const title = await page.locator(".omv-card-title").nth(1).textContent();
+  check(title?.includes("SN-000243") ?? false, `Enter on a focused row selects it (detail shows "${title}")`);
+}
+
+const firstTab = page.locator('.ex-cloud-tabs [role="tab"]').first();
+await firstTab.focus();
+await page.keyboard.press("ArrowRight");
+const focusedTab = await page.evaluate(() => document.activeElement?.textContent ?? "");
+check(focusedTab.startsWith("Aufträge"), `ArrowRight moves focus to the next tab (focused: "${focusedTab}")`);
+const tabStops = await page.locator('.ex-cloud-tabs [role="tab"][tabindex="0"]').count();
+check(tabStops === 1, `tablist has exactly one tab stop (roving tabindex: ${tabStops})`);
+
+await page.getByRole("tab", { name: "Anlagen" }).click();
+const opener = page.getByRole("button", { name: "Neuer Auftrag" }).first();
+await opener.focus();
+await page.keyboard.press("Enter");
+await page.waitForTimeout(100);
+const inDialog = await page.evaluate(() => !!document.activeElement?.closest('[role="dialog"]'));
+check(inDialog, "opening the modal moves focus into the dialog");
+await page.keyboard.press("Escape");
+await page.waitForTimeout(100);
+const back = await page.evaluate(() => document.activeElement?.textContent ?? "");
+check(back.includes("Neuer Auftrag"), `closing the modal returns focus to its opener (focused: "${back}")`);
+
 await browser.close();
 await server.close();
-console.log(`\n${total} violating node(s) across ${CASES.length} screens`);
-process.exit(total ? 1 : 0);
+console.log(`\n${total} violating node(s) across ${CASES.length} screens; ${fails.length} contract check(s) failed`);
+process.exit(total || fails.length ? 1 : 0);

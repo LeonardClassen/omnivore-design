@@ -200,15 +200,15 @@ export function Gallery({ surface }: { surface: Surface }) {
           <Box width={320}>
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               <span className="omv-meta">Fill batch · 68%</span>
-              <Progress value={68} tone="primary" />
+              <Progress value={68} tone="primary" label="Primary" />
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               <span className="omv-meta">Buffer · 40%</span>
-              <Progress value={40} tone="info" />
+              <Progress value={40} tone="info" label="Info" />
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               <span className="omv-meta">Temp threshold · 88%</span>
-              <Progress value={88} tone="warning" />
+              <Progress value={88} tone="warning" label="Warning" />
             </div>
           </Box>
         </Section>

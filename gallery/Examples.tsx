@@ -143,7 +143,7 @@ function HmiCockpit() {
           <KV label="Aktion" mono>MOVE Slot 4 → Waage</KV>
           <KV label="Wanne" mono>W-0172 · Charge 31</KV>
           <div style={{ margin: "14px 0" }}>
-            <Progress value={pct} />
+            <Progress value={pct} label="Fortschritt der Aktion" />
           </div>
           <div className="ex-actions">
             <Btn
@@ -245,7 +245,7 @@ function HmiRegal() {
             <KV label="Masttag" mono>{s.day} / 14</KV>
             <KV label="Letzte Fütterung" mono>heute 06:30</KV>
             <div style={{ margin: "14px 0" }}>
-              <Progress value={(s.day / 14) * 100} />
+              <Progress value={(s.day / 14) * 100} label="Masttag" />
             </div>
             <div className="ex-actions">
               <Btn variant="primary">Zur Waage</Btn>
@@ -451,7 +451,7 @@ function CloudPlants({ onNew }: { onNew: () => void }) {
                   </Badge>
                 ),
               },
-              { key: "fill", header: "Füllstand", render: (r: Plant) => <Progress value={r.fill} /> },
+              { key: "fill", header: "Füllstand", render: (r: Plant) => <Progress value={r.fill} label={`Füllstand ${r.sn}`} /> },
             ]}
             columnsTemplate="1.1fr 1fr 0.9fr 1fr"
             rows={rows}
