@@ -39,22 +39,6 @@
   /* nav + theme reuse .omv-tabs, but as topbar controls they carry no baseline */
   .gal-nav.omv-tabs, .gal-theme.omv-tabs { border-bottom: 0; }
 
-  /* ---- Brand-green picker (gallery-only, overrides --brand-* live) ---- */
-  .gal-greenbar {
-    display: flex; gap: 8px; align-items: center; overflow-x: auto;
-    padding: 10px 28px; border-bottom: 1px solid var(--border); background: var(--surface);
-  }
-  .gal-greenbar-label { font-size: 12px; color: var(--text-tertiary); white-space: nowrap; margin-right: 4px; }
-  .gal-chip {
-    display: flex; align-items: center; gap: 8px; flex: none; cursor: pointer;
-    padding: 4px 10px 4px 4px; border-radius: 999px; font: inherit; font-size: 12px;
-    background: transparent; color: var(--text-secondary); border: 1px solid var(--border);
-  }
-  .gal-greenbar-sep { width: 1px; align-self: stretch; background: var(--border); margin: 0 8px; flex: none; }
-  .gal-chip.is-active { border-color: var(--text); color: var(--text); }
-  .gal-chip-sw { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; }
-  .gal-chip-txt { display: flex; flex-direction: column; line-height: 1.2; text-align: left; }
-  .gal-chip-txt small { color: var(--text-tertiary); font-family: var(--font-mono); }
 
   /* ---- Example screens (ex-*): layout glue a consuming app would own ---- */
   .ex-page { max-width: 1240px; margin: 0 auto; padding: 20px 28px 60px; }
@@ -99,7 +83,7 @@
   .ex-cloud-tabs.omv-tabs { border-bottom: 0; margin-right: auto; margin-left: 12px; }
 
   @media (max-width: 720px) {
-    .gal-topbar, .gal-greenbar { padding-left: 16px; padding-right: 16px; }
+    .gal-topbar { padding-left: 16px; padding-right: 16px; }
     .ex-page { padding: 16px; }
     .ex-split { grid-template-columns: minmax(0, 1fr); }
     .ex-grid2 { grid-template-columns: minmax(0, 1fr); }

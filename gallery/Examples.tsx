@@ -41,8 +41,7 @@ export function Examples({ theme, setTheme }: { theme: Theme; setTheme: (t: Them
           onSelect={(id) => setTheme(id as Theme)}
         />
         <p className="ex-hint">
-          Alles klickbar, nichts ist echt verbunden. Das Grün oben umschalten und dieselben Bildschirme
-          vergleichen.
+          Alles klickbar, nichts ist echt verbunden.
         </p>
       </div>
       {theme === "dark-industrial" ? <HmiExample /> : <CloudExample />}
