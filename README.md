@@ -6,9 +6,10 @@ customer-ops **cloud dashboard** (light) and the industrial **HMI** on the WAGO 
 
 > **Look first:** open the live gallery at
 > **<https://leonardclassen.github.io/omnivore-design/>** and flip the
-> **Light · Cloud / Dark · Industrial** switch. Two pages — **Tokens** (the design truth, read
-> live from `tokens.css`) and **Components** (the real `ui/` React primitives) — both re-theme
-> from the same tokens; nothing is hard-coded. Run it locally with `npm install && npm run dev`.
+> **Light · Cloud / Dark · Industrial** switch. Three pages — **Tokens** (the design truth, read
+> live from `tokens.css`), **Components** (the real `ui/` React primitives) and **Beispiele**
+> (clickable HMI and cloud screens built only from them) — all re-theme from the same tokens;
+> nothing is hard-coded. Run it locally with `npm install && npm run dev`.
 
 ---
 
@@ -19,7 +20,10 @@ customer-ops **cloud dashboard** (light) and the industrial **HMI** on the WAGO 
 | [`tokens.css`](tokens.css) | **The token API.** Framework-neutral CSS custom properties: colors (2 theme maps), type, spacing, radii, shadows, motion. Consumable by *any* surface, even build-less via `<link>`. |
 | [`components.css`](components.css) | Component stylesheet — token-driven, theme-aware. The same class renders surface-appropriately per `[data-theme]`. |
 | [`ui/`](ui/) | **The React primitive library** — thin `.tsx` wrappers over the `components.css` classes: HMI/layout (`Card` · `Stat` · `Led` · `Empty`), controls (`Btn` · `Modal` · `Select` · `Field` · `Input`), status (`Badge` · `Banner` · `Progress`), structure/data (`Table` · `Tabs` · `Stepper` · `KV` · `Avatar` · `Skeleton` · `RadioCard`). `Card`/`Stat`/`Btn`/`Led`/`Empty` are extracted 1:1 from the HMI. |
-| [`gallery/`](gallery/) | The Vite site published to GitHub Pages — a **Tokens** page (design truth, read live from `tokens.css`) + a **Components** page (the real `ui/` primitives), both themes. The living reference; show it to teammates. |
+| [`fonts/`](fonts/) | **Self-hosted fonts** (the HMI panel is offline): Inter, Montserrat, JetBrains Mono as variable woff2 + OFL licences; `fonts/fonts.css` declares them. Regenerate with `npm run fonts`. |
+| [`assets/logo/`](assets/logo/) | The logo: official flat **V6a** mark (EPS/PNG + brand sheet) and the Glitzer-Fliege; which file for which ground is in its README. |
+| [`gallery/`](gallery/) | The Vite site published to GitHub Pages — **Tokens**, **Components** and **Beispiele** pages, both themes. The living reference; show it to teammates. |
+| [`scripts/a11y.mjs`](scripts/a11y.mjs) | **Quality gate** (`npm run a11y`): axe-core WCAG 2.2 A/AA over every gallery screen in both themes, plus keyboard/ARIA contract checks, reduced motion, forced colors and offline fonts. Must end with 0 / 0. |
 
 **Scope: shared tokens + a React primitive library.** `tokens.css` is framework-neutral and
 consumable by any surface. The `ui/` components are consumed by build-based surfaces — the
@@ -40,6 +44,7 @@ git submodule update --init --recursive   # after clone; the classic gotcha
 **Tokens only** (any surface, incl. build-less):
 
 ```html
+<link rel="stylesheet" href="vendor/omnivore-design/fonts/fonts.css" />
 <link rel="stylesheet" href="vendor/omnivore-design/tokens.css" />
 <link rel="stylesheet" href="vendor/omnivore-design/components.css" />
 <html data-theme="light-cloud">      <!-- default; may be omitted -->
@@ -75,15 +80,32 @@ dark panel. So there are **two green tokens, split by role**:
 - `--brand` — **interactive only**: primary CTAs, focus rings, selected/active, links, brand marks.
 - `--ok` — **operational status only**: "running / healthy / present" LEDs and status pills.
 
-Different hues (warm brand vs cool status-emerald); on dark the gap widens (`--brand #4caf50`
-vs `--ok #34d399`). Don't use `--brand` for status or `--ok` for interaction.
+Different hues (yellow-green brand vs cool status-emerald): `--brand #57a639` (the logo's grass
+green, RAL 6018) vs `--ok #10b981` / dark `#34d399`. Don't use `--brand` for status or `--ok`
+for interaction.
+
+## Colour as text — the `-text` tokens
+
+The base role colours (`--brand`, `--ok`, `--warn`, `--err`, `--info`) are for **fills, dots and
+borders**. Where a role colour is used **as text** (badge, banner, field error, active tab, stat
+value), use its `-text` token: those hold **4.5:1** on their soft fill, on white and on the
+canvas (WCAG 1.4.3). A solid danger fill takes `--err-fill` + `--err-contrast`; a solid brand
+fill takes `--brand-contrast` (dark ink — white on the brand green is only 3.0:1). Input,
+select and option-card edges use `--border-control` (≥ 3:1, WCAG 1.4.11).
+
+## Brand
+
+Source: the official **Omnivore V6a** logo (`assets/logo/flach/`, brand sheet
+`Omnivore_Informationen_V6a.pdf`). Brand green = **RAL 6018 `#57A639`** (the later grass-green
+version of the mark), grey `#3C3C3B`, typeface **Montserrat** → `--font-display` for headings;
+body text stays Inter.
 
 ## Themes
 
 | Theme | Surface | Basis |
 |---|---|---|
-| `light-cloud` (default) | customer-ops cloud dashboard | Material-green brand on a slate light canvas; solid primary buttons |
-| `dark-industrial` | HMI on the WAGO Web Panel 400 | GitHub-dark "Industrial Glass"; calm soft-accent primary, touch targets, mono-uppercase card titles; teal demoted to `--info` |
+| `light-cloud` (default) | customer-ops cloud dashboard | logo-green brand on a slate light canvas; solid primary buttons |
+| `dark-industrial` | HMI on the WAGO Web Panel 400 | GitHub-dark "Industrial Glass"; calm soft-accent primary, touch targets, mono-uppercase card titles; blue `--info` (the old teal is retired) |
 
 Token **names** are theme-invariant; only their **values** (and a few ergonomic treatments)
 change per theme. Add a role once in `tokens.css` and both surfaces inherit it.
@@ -98,5 +120,7 @@ language (ADR-013).
 
 ## Versioning
 
-`v0.2.0` — adds the `ui/` React primitive library. `tokens.css` + `components.css` + the `ui/`
+Current version: see [`package.json`](package.json); every change is listed in
+[`CHANGELOG.md`](CHANGELOG.md). `tokens.css` + `components.css` + `fonts/fonts.css` + the `ui/`
 public exports are the API; treat changes to token *names* or component *props* as breaking.
+Each release is tagged `vX.Y.Z` — pin the submodule to a tag, not to `main`.

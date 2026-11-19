@@ -17,6 +17,7 @@ const COLOR_GROUPS: { label: string; tokens: [string, string][] }[] = [
       ["--brand-active", "brand-active"],
       ["--brand-soft", "brand-soft"],
       ["--brand-contrast", "brand-contrast"],
+      ["--brand-text", "brand-text"],
     ],
   },
   {
@@ -30,6 +31,17 @@ const COLOR_GROUPS: { label: string; tokens: [string, string][] }[] = [
       ["--warn-soft", "warn-soft"],
       ["--err-soft", "err-soft"],
       ["--info-soft", "info-soft"],
+    ],
+  },
+  {
+    label: "Role colours as text — WCAG 4.5:1 on their soft fill",
+    tokens: [
+      ["--ok-text", "ok-text"],
+      ["--warn-text", "warn-text"],
+      ["--err-text", "err-text"],
+      ["--info-text", "info-text"],
+      ["--err-fill", "err-fill (danger button)"],
+      ["--err-contrast", "err-contrast"],
     ],
   },
   {
@@ -49,6 +61,7 @@ const COLOR_GROUPS: { label: string; tokens: [string, string][] }[] = [
       ["--border", "border"],
       ["--border-light", "border-light"],
       ["--border-strong", "border-strong"],
+      ["--border-control", "border-control (inputs, 3:1)"],
     ],
   },
 ];
