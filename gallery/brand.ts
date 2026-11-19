@@ -12,8 +12,8 @@ export const TOKEN_BRAND_KEY = "R";
 export type FontChoice = { key: string; label: string; display: string | null; sans: string | null };
 const MONTSERRAT = '"Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif';
 export const FONT_CHOICES: FontChoice[] = [
-  { key: "inter", label: "Inter", display: null, sans: null },
-  { key: "mont-head", label: "Montserrat Überschriften", display: MONTSERRAT, sans: null },
+  { key: "inter", label: "Inter", display: '"Inter", system-ui, sans-serif', sans: null },
+  { key: "mont-head", label: "Montserrat Überschriften", display: null, sans: null }, // = tokens.css
   { key: "mont-all", label: "Montserrat überall", display: MONTSERRAT, sans: MONTSERRAT },
 ];
 

@@ -39,9 +39,11 @@
   /* Fonts -------------------------------------------------------------- */
   --font-sans: "Inter", "InterVariable", system-ui, -apple-system,
                "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  /* Display face for brand marks, headings and (light) card titles.
-     Defaults to the text face; the brand font per the logo spec is Montserrat. */
-  --font-display: var(--font-sans);
+  /* Display face for brand marks, headings and (light) card titles:
+     Montserrat, the logo's typeface (assets/logo/flach/Omnivore_Informationen_V6a.pdf).
+     Body text, tables and values stay on --font-sans. Consumers load the font
+     themselves (Google Fonts or self-hosted, weights 500/600). */
+  --font-display: "Montserrat", var(--font-sans);
   --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code",
                "SF Mono", Menlo, Consolas, monospace;
 
