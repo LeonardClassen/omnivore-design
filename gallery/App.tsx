@@ -3,8 +3,8 @@ import { Gallery, type Surface } from "./Gallery";
 import { Tokens } from "./Tokens";
 import { Examples } from "./Examples";
 import { BRAND_CHOICES, applyBrand, contrastText } from "./brand";
-import logoUrl from "../assets/logo/1zu1/fliege-app-icon-64.png";
-import flyUrl from "../assets/logo/1zu1/fliege-transparent-256.png";
+import flyDark from "../assets/logo/1zu1/fliege-dunkel-96.png";
+import flyLight from "../assets/logo/1zu1/fliege-hell-96.png";
 
 export type Theme = "light-cloud" | "dark-industrial";
 type Route = "tokens" | "components" | "examples";
@@ -58,8 +58,8 @@ export function App() {
       <header className="gal-topbar">
         <div className="gal-brand">
           <img
-            className="gal-brand-logo"
-            src={theme === "dark-industrial" ? flyUrl : logoUrl}
+            className={"gal-brand-logo" + (theme === "dark-industrial" ? " omv-fly-glow" : "")}
+            src={theme === "dark-industrial" ? flyDark : flyLight}
             alt=""
           />
           <div>

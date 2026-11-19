@@ -35,7 +35,9 @@
   .gal-brand-sub { font-size: 12px; color: var(--text-tertiary); }
   /* nav + theme reuse .omv-tabs, but as topbar controls they carry no baseline */
   .gal-nav.omv-tabs, .gal-theme.omv-tabs { border-bottom: 0; }
-  .gal-brand-logo { width: 36px; height: 36px; object-fit: contain; border-radius: 8px; display: block; }
+  .gal-brand-logo { height: 36px; width: auto; display: block; }
+  /* the logo's own glow, in the brand green (dark ground only) */
+  .omv-fly-glow { filter: drop-shadow(0 0 4px color-mix(in srgb, var(--brand) 60%, transparent)) drop-shadow(0 0 12px color-mix(in srgb, var(--brand) 28%, transparent)); }
 
   /* ---- Brand-green picker (gallery-only, overrides --brand-* live) ---- */
   .gal-greenbar {
@@ -72,7 +74,7 @@
 
   .ex-hmi { display: flex; min-height: 620px; }
   .ex-rail { width: 120px; flex: none; background: var(--surface); border-right: 1px solid var(--border); padding: 12px 8px; display: flex; flex-direction: column; gap: 6px; }
-  .ex-rail-logo { width: 64px; height: 64px; object-fit: contain; margin: 0 auto 10px; display: block; }
+  .ex-rail-logo { height: 76px; width: auto; margin: 6px auto 16px; display: block; }
   .ex-rail-item {
     min-height: var(--tap, 48px); border-radius: var(--radius-md); font: inherit; font-size: 14px; cursor: pointer;
     background: transparent; color: var(--text-secondary); border: 1px solid transparent; text-align: left; padding: 0 12px;
@@ -92,7 +94,7 @@
   .ex-slot-n { font-family: var(--font-mono); font-weight: 700; font-size: 14px; }
 
   .ex-cloud-top { display: flex; align-items: center; gap: 14px; padding: 10px 20px; background: var(--surface); border-bottom: 1px solid var(--border); }
-  .ex-cloud-logo { width: 32px; height: 32px; border-radius: 8px; }
+  .ex-cloud-logo { height: 34px; width: auto; display: block; }
   .ex-cloud-tabs.omv-tabs { border-bottom: 0; margin-right: auto; margin-left: 12px; }
 
   @media (max-width: 720px) {
@@ -102,7 +104,7 @@
     .ex-grid2 { grid-template-columns: minmax(0, 1fr); }
     .ex-hmi { flex-direction: column; }
     .ex-rail { width: auto; flex-direction: row; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--border); }
-    .ex-rail-logo { width: 40px; height: 40px; margin: 0 6px 0 0; flex: none; }
+    .ex-rail-logo { height: 44px; margin: 0 8px 0 4px; flex: none; }
     .ex-rail-item { flex: none; }
     .ex-cloud-top { flex-wrap: wrap; }
   }
