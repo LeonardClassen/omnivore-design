@@ -71,7 +71,7 @@
 
 .omv-input-wrap {
   position: relative; display: flex; align-items: center;
-  border: 1px solid var(--border); background: var(--surface);
+  border: 1px solid var(--border-control); background: var(--surface);
   border-radius: var(--radius-md);
   transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
 }
@@ -190,12 +190,12 @@ select.omv-input { padding-right: 32px; appearance: none; cursor: pointer; }
 
 /* ---- Radio card (plan / option picker) ----------------------------------- */
 .omv-radio-card {
-  border: 1.5px solid var(--border); border-radius: var(--radius-lg);
+  border: 1.5px solid var(--border-control); border-radius: var(--radius-lg);
   padding: 16px; background: var(--surface); cursor: pointer;
   transition: all var(--dur-fast) var(--ease-out);
   display: flex; flex-direction: column; gap: 8px;
 }
-.omv-radio-card:hover { border-color: var(--border-strong); }
+.omv-radio-card:hover { border-color: var(--text-secondary); }
 .omv-radio-card.is-selected { border-color: var(--brand); background: var(--brand-soft); box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 12%, transparent); }
 
 /* ---- Lifecycle stepper (horizontal) -------------------------------------- */

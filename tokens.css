@@ -152,6 +152,7 @@
   --border:          #e2e8f0;   /* slate-200 */
   --border-light:    #f1f5f9;   /* slate-100 */
   --border-strong:   #cbd5e1;   /* slate-300 */
+  --border-control:  #7c8799;   /* input/select/option edges: >= 3:1 on every surface (WCAG 1.4.11) */
 
   /* Shadows — multi-layer, low opacity. Never a single heavy drop. */
   --shadow-xs:  0 1px 2px 0 rgb(15 23 42 / 0.04);
@@ -209,6 +210,7 @@
   --border:          #30363d;
   --border-light:    #21262d;
   --border-strong:   #484f58;
+  --border-control:  #6e7681;   /* >= 3:1 on every dark surface (WCAG 1.4.11) */
 
   /* Shadows — subtle on dark; elevation is mostly border + faint depth. */
   --shadow-xs:  0 1px 2px 0 rgb(1 4 9 / 0.30);
