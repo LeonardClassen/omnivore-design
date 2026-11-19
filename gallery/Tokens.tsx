@@ -107,7 +107,7 @@ function Block({ num, title, sub, children }: { num: string; title: string; sub:
   return (
     <section style={{ marginTop: 56 }}>
       <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 4 }}>
-        <span className="omv-mono" style={{ fontSize: 12, color: "var(--brand)" }}>{num}</span>
+        <span className="omv-mono" style={{ fontSize: 12, color: "var(--brand-text)" }}>{num}</span>
         <h2 className="omv-h3">{title}</h2>
       </div>
       <p className="omv-meta" style={{ margin: "0 0 22px", maxWidth: "68ch" }}>{sub}</p>
@@ -205,13 +205,13 @@ export function Tokens({ theme }: { theme: Theme }) {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18 }}>
             <div style={TG_CARD}>
               <div style={{ height: 54, borderRadius: "var(--radius-md)", marginBottom: 12, background: "var(--brand)" }} />
-              <div style={{ ...TG_ROLE, color: "var(--brand-active)" }}>Interactive</div>
+              <div style={{ ...TG_ROLE, color: "var(--brand-text)" }}>Interactive</div>
               <div style={{ fontWeight: 600, margin: "2px 0 4px", color: "var(--text)" }}><span className="omv-mono">--brand</span></div>
               <div className="omv-meta">Primary CTAs · focus rings · selected/active · links · brand marks. Never status.</div>
             </div>
             <div style={TG_CARD}>
               <div style={{ height: 54, borderRadius: "var(--radius-md)", marginBottom: 12, background: "var(--ok)" }} />
-              <div style={{ ...TG_ROLE, color: "var(--ok)" }}>Status</div>
+              <div style={{ ...TG_ROLE, color: "var(--ok-text)" }}>Status</div>
               <div style={{ fontWeight: 600, margin: "2px 0 4px", color: "var(--text)" }}><span className="omv-mono">--ok</span></div>
               <div className="omv-meta">"Running / healthy / present" — LEDs and status pills only. Never interaction.</div>
             </div>
@@ -219,14 +219,14 @@ export function Tokens({ theme }: { theme: Theme }) {
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginTop: 16 }}>
             <div style={{ border: "1px solid var(--border)", borderRadius: "var(--radius-md)", padding: 14 }}>
-              <div style={{ ...DD_TAG, color: "var(--ok)" }}>✓ Correct</div>
+              <div style={{ ...DD_TAG, color: "var(--ok-text)" }}>✓ Correct</div>
               <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
                 <button className="omv-btn omv-btn-primary omv-btn-sm">Approve</button>
                 <span className="omv-led"><span className="omv-led-dot is-ok" />Operational</span>
               </div>
             </div>
             <div style={{ border: "1px solid var(--border)", borderRadius: "var(--radius-md)", padding: 14 }}>
-              <div style={{ ...DD_TAG, color: "var(--err)" }}>✕ Wrong</div>
+              <div style={{ ...DD_TAG, color: "var(--err-text)" }}>✕ Wrong</div>
               <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
                 <button className="omv-btn omv-btn-sm" style={{ background: "var(--ok)", color: "#062b1e" }}>Approve</button>
                 <span className="omv-led">
@@ -307,7 +307,7 @@ export function Tokens({ theme }: { theme: Theme }) {
                     paddingBottom: 6,
                     fontFamily: "var(--font-mono)",
                     fontSize: 11,
-                    color: "var(--brand-active)",
+                    color: "var(--brand-text)",
                   }}
                 >
                   {nm} · {v[tok] || "—"}

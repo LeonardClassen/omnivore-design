@@ -45,10 +45,10 @@
 .omv-btn-ghost     { background: transparent; color: var(--text-secondary); }
 .omv-btn-ghost:hover:not(:disabled) { background: var(--surface-raised); color: var(--text); }
 
-.omv-btn-danger    { background: var(--err); color: #fff; }
+.omv-btn-danger    { background: var(--err-fill); color: var(--err-contrast); }
 .omv-btn-danger:hover:not(:disabled) { filter: brightness(0.94); }
 
-.omv-btn-dangerSoft{ background: var(--err-soft); color: var(--err); border-color: var(--err-border); }
+.omv-btn-dangerSoft{ background: var(--err-soft); color: var(--err-text); border-color: var(--err-border); }
 
 .omv-btn-sm { height: 28px; padding: 0 10px; font-size: 13px; border-radius: var(--radius-sm); }
 .omv-btn-md { height: 36px; font-size: 14px; }
@@ -67,7 +67,7 @@
 .omv-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .omv-field-label { font-size: 13px; font-weight: var(--fw-medium); color: var(--text); }
 .omv-field-hint  { font-size: 12px; color: var(--text-secondary); }
-.omv-field-error { font-size: 12px; color: var(--err); }
+.omv-field-error { font-size: 12px; color: var(--err-text); }
 
 .omv-input-wrap {
   position: relative; display: flex; align-items: center;
@@ -96,11 +96,11 @@ select.omv-input { padding-right: 32px; appearance: none; cursor: pointer; }
   font-size: 12px; font-weight: var(--fw-medium); white-space: nowrap;
 }
 .omv-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
-.omv-badge-primary { background: var(--brand-soft); color: var(--brand-active); }
-.omv-badge-ok      { background: var(--ok-soft);   color: var(--ok); }
-.omv-badge-warn    { background: var(--warn-soft); color: var(--warn); }
-.omv-badge-danger  { background: var(--err-soft);  color: var(--err); }
-.omv-badge-info    { background: var(--info-soft); color: var(--info); }
+.omv-badge-primary { background: var(--brand-soft); color: var(--brand-text); }
+.omv-badge-ok      { background: var(--ok-soft);   color: var(--ok-text); }
+.omv-badge-warn    { background: var(--warn-soft); color: var(--warn-text); }
+.omv-badge-danger  { background: var(--err-soft);  color: var(--err-text); }
+.omv-badge-info    { background: var(--info-soft); color: var(--info-text); }
 .omv-badge-neutral { background: var(--surface-raised); color: var(--text-secondary); }
 
 /* ---- LED (HMI status primitive — demonstrates the OK-state green) -------- */
@@ -129,10 +129,10 @@ select.omv-input { padding-right: 32px; appearance: none; cursor: pointer; }
   padding: 12px 14px; border-radius: var(--radius-md);
   border: 1px solid; font-size: 13px; line-height: 19px;
 }
-.omv-banner-ok      { background: var(--ok-soft);   border-color: var(--ok-border);   color: var(--ok); }
-.omv-banner-warning { background: var(--warn-soft); border-color: var(--warn-border); color: var(--warn); }
-.omv-banner-danger  { background: var(--err-soft);  border-color: var(--err-border);  color: var(--err); }
-.omv-banner-info    { background: var(--info-soft); border-color: var(--info-border); color: var(--info); }
+.omv-banner-ok      { background: var(--ok-soft);   border-color: var(--ok-border);   color: var(--ok-text); }
+.omv-banner-warning { background: var(--warn-soft); border-color: var(--warn-border); color: var(--warn-text); }
+.omv-banner-danger  { background: var(--err-soft);  border-color: var(--err-border);  color: var(--err-text); }
+.omv-banner-info    { background: var(--info-soft); border-color: var(--info-border); color: var(--info-text); }
 .omv-banner-title   { font-weight: var(--fw-semibold); margin-bottom: 2px; }
 
 /* ---- Progress ------------------------------------------------------------ */
@@ -150,7 +150,7 @@ select.omv-input { padding-right: 32px; appearance: none; cursor: pointer; }
   transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
 }
 .omv-tab:hover { color: var(--text); }
-.omv-tab.is-active { color: var(--brand-active); border-bottom-color: var(--brand); font-weight: var(--fw-semibold); }
+.omv-tab.is-active { color: var(--brand-text); border-bottom-color: var(--brand); font-weight: var(--fw-semibold); }
 
 /* ---- Table --------------------------------------------------------------- */
 .omv-table { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
@@ -175,7 +175,7 @@ select.omv-input { padding-right: 32px; appearance: none; cursor: pointer; }
 /* ---- Avatar -------------------------------------------------------------- */
 .omv-avatar {
   display: inline-flex; align-items: center; justify-content: center;
-  border-radius: 50%; background: var(--brand-soft); color: var(--brand-active);
+  border-radius: 50%; background: var(--brand-soft); color: var(--brand-text);
   font-weight: var(--fw-semibold); flex: 0 0 auto;
 }
 
@@ -211,7 +211,7 @@ select.omv-input { padding-right: 32px; appearance: none; cursor: pointer; }
   transition: all var(--dur-base) var(--ease-out);
 }
 .omv-step-dot.is-past { background: var(--brand); border-color: var(--brand); color: var(--brand-contrast); }
-.omv-step-dot.is-current { border-color: var(--brand); color: var(--brand-active); box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand) 18%, transparent); }
+.omv-step-dot.is-current { border-color: var(--brand); color: var(--brand-text); box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand) 18%, transparent); }
 .omv-step-label { font-size: 12px; color: var(--text-secondary); text-align: center; line-height: 16px; }
 .omv-step-label.is-current { color: var(--text); font-weight: var(--fw-semibold); }
 .omv-step-sublabel { font-size: 11px; color: var(--text-tertiary); }
@@ -252,9 +252,9 @@ select.omv-input { padding-right: 32px; appearance: none; cursor: pointer; }
 .omv-stat-label { font-size: 10px; font-weight: var(--fw-medium); text-transform: uppercase; letter-spacing: var(--tracking-caps); color: var(--text-tertiary); }
 .omv-stat-row { display: flex; align-items: baseline; gap: 4px; }
 .omv-stat-value { font-family: var(--font-mono); font-size: 24px; font-feature-settings: "tnum"; line-height: 1.1; color: var(--text); }
-.omv-stat-value.is-ok   { color: var(--ok); }
-.omv-stat-value.is-warn { color: var(--warn); }
-.omv-stat-value.is-err  { color: var(--err); }
+.omv-stat-value.is-ok   { color: var(--ok-text); }
+.omv-stat-value.is-warn { color: var(--warn-text); }
+.omv-stat-value.is-err  { color: var(--err-text); }
 .omv-stat-unit { font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary); }
 .omv-stat-hint { font-size: 11px; color: var(--text-tertiary); }
 
@@ -273,7 +273,7 @@ select.omv-input { padding-right: 32px; appearance: none; cursor: pointer; }
    (salience — a solid green fill would read too loud on a calm dark screen). */
 [data-theme="dark-industrial"] .omv-btn-primary {
   background: var(--brand-soft);
-  color: var(--brand);
+  color: var(--brand-text);
   border-color: color-mix(in srgb, var(--brand) 55%, transparent);
 }
 [data-theme="dark-industrial"] .omv-btn-primary:hover:not(:disabled) {
