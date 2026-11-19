@@ -98,6 +98,24 @@ await page.waitForTimeout(100);
 const back = await page.evaluate(() => document.activeElement?.textContent ?? "");
 check(back.includes("Neuer Auftrag"), `closing the modal returns focus to its opener (focused: "${back}")`);
 
+// Reduced motion: transitions and the skeleton shimmer stop.
+await page.emulateMedia({ reducedMotion: "reduce" });
+const motion = await page.evaluate(() => {
+  const btn = document.querySelector(".omv-btn");
+  return btn ? getComputedStyle(btn).transitionDuration : "none";
+});
+check(motion.split(",").every((d) => parseFloat(d) <= 0.01), `prefers-reduced-motion stops transitions (button: ${motion})`);
+await page.emulateMedia({ reducedMotion: "no-preference" });
+
+// Forced colors (Windows high contrast): focus rings drawn with box-shadow vanish,
+// so focusable controls need a real outline there.
+await page.emulateMedia({ forcedColors: "active" });
+await page.getByRole("tab", { name: "Anlagen" }).focus();
+await page.keyboard.press("ArrowRight");
+const outline = await page.evaluate(() => getComputedStyle(document.activeElement).outlineStyle);
+check(outline !== "none", `forced-colors: focused tab keeps a visible outline (${outline})`);
+await page.emulateMedia({ forcedColors: "none" });
+
 await browser.close();
 await server.close();
 console.log(`\n${total} violating node(s) across ${CASES.length} screens; ${fails.length} contract check(s) failed`);

@@ -297,3 +297,30 @@ select.omv-input { padding-right: 32px; appearance: none; cursor: pointer; }
   letter-spacing: var(--tracking-caps);
   color: var(--text-secondary);
 }
+
+/* =========================================================================
+   USER PREFERENCES — honoured on every surface.
+   ========================================================================= */
+
+/* Reduced motion (WCAG 2.3.3): no transitions, no shimmer, no animated rings. */
+@media (prefers-reduced-motion: reduce) {
+  [class*="omv-"], [class*="omv-"]::before, [class*="omv-"]::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* Forced colors (Windows high contrast): box-shadow focus rings and soft fills
+   are dropped by the browser, so focus and selection get real outlines/borders
+   in system colours. */
+@media (forced-colors: active) {
+  .omv-btn:focus-visible, .omv-iconbtn:focus-visible, .omv-tab:focus-visible,
+  .omv-trow[tabindex]:focus-visible, .omv-radio-card:focus-visible,
+  .omv-input-wrap:focus-within {
+    outline: 2px solid Highlight; outline-offset: 2px;
+  }
+  .omv-tab.is-active { border-bottom-color: Highlight; }
+  .omv-radio-card.is-selected { border-color: Highlight; }
+  .omv-progress-bar, .omv-led-dot { forced-color-adjust: none; }
+}
