@@ -4,6 +4,7 @@ import { Tokens } from "./Tokens";
 import { Examples } from "./Examples";
 import { BRAND_CHOICES, applyBrand, contrastText } from "./brand";
 import logoUrl from "../assets/logo/1zu1/fliege-app-icon-64.png";
+import flyUrl from "../assets/logo/1zu1/fliege-transparent-256.png";
 
 export type Theme = "light-cloud" | "dark-industrial";
 type Route = "tokens" | "components" | "examples";
@@ -56,7 +57,11 @@ export function App() {
     <>
       <header className="gal-topbar">
         <div className="gal-brand">
-          <img className="gal-brand-logo" src={logoUrl} alt="" />
+          <img
+            className="gal-brand-logo"
+            src={theme === "dark-industrial" ? flyUrl : logoUrl}
+            alt=""
+          />
           <div>
             <div className="gal-brand-name">Omnivore Design System</div>
             <div className="gal-brand-sub">one token layer · two surfaces</div>

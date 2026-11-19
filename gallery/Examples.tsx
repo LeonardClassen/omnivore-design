@@ -22,6 +22,8 @@ import {
 } from "../ui/src/index";
 import type { Theme } from "./App";
 import logoUrl from "../assets/logo/1zu1/fliege-app-icon-128.png";
+// Cut-out fly: only on dark ground (assets/logo/README.md), i.e. the HMI.
+import flyUrl from "../assets/logo/1zu1/fliege-transparent-256.png";
 
 // Clickable example screens: one per surface, built ONLY from ui/src
 // primitives plus a little layout glue (ex-* classes in index.html). Domain
@@ -74,7 +76,7 @@ function HmiExample() {
   return (
     <div className="ex-frame ex-hmi">
       <aside className="ex-rail">
-        <img className="ex-rail-logo" src={logoUrl} alt="" />
+        <img className="ex-rail-logo" src={flyUrl} alt="" />
         {RAIL.map((r) => (
           <button
             key={r.id}
