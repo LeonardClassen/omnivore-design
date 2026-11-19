@@ -22,7 +22,7 @@
 
    THE TWO-GREEN RULE (why there are two greens)
    ---------------------------------------------
-   --brand  = the ONE company accent (Material Green). INTERACTIVE ONLY:
+   --brand  = the ONE company accent (logo grass green, RAL 6018). INTERACTIVE ONLY:
               primary CTAs, focus rings, selected/active, links, brand marks.
    --ok     = OPERATIONAL STATE only (a distinct, cooler emerald):
               "running / healthy / present" LEDs, status pills.
@@ -39,6 +39,9 @@
   /* Fonts -------------------------------------------------------------- */
   --font-sans: "Inter", "InterVariable", system-ui, -apple-system,
                "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* Display face for brand marks, headings and (light) card titles.
+     Defaults to the text face; the brand font per the logo spec is Montserrat. */
+  --font-display: var(--font-sans);
   --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code",
                "SF Mono", Menlo, Consolas, monospace;
 
@@ -107,12 +110,12 @@
   color-scheme: light;
 
   /* Brand — Material Green. Interactive only (see two-green rule). */
-  --brand:          #4caf50;   /* Green 500 */
-  --brand-hover:    #388e3c;   /* Green 700 */
-  --brand-active:   #2e7d32;   /* Green 800 */
-  --brand-soft:     #e8f5e9;   /* Green 50 — subtle fills, selected rows */
-  --brand-contrast: #ffffff;   /* text/icon on a solid brand fill */
-  --brand-ring:     0 0 0 3px rgb(76 175 80 / 0.28);
+  --brand:          #57a639;   /* RAL 6018 Gelbgrün — logo grass green (assets/logo/flach) */
+  --brand-hover:    #4a8d30;
+  --brand-active:   #3f7a29;   /* also brand-coloured text on white (5.2:1) */
+  --brand-soft:     #eef6ea;   /* subtle fills, selected rows */
+  --brand-contrast: #0d1117;   /* ink on a solid brand fill (6.2:1; white would be 3.0:1) */
+  --brand-ring:     0 0 0 3px rgb(87 166 57 / 0.28);
 
   /* State — reserved for status meaning. Never decorative. */
   --ok:         #10b981;  --ok-soft:   #ecfdf5;  --ok-border:   #a7f3d0;  /* emerald: cool status green */
@@ -152,13 +155,13 @@
 [data-theme="dark-industrial"] {
   color-scheme: dark;
 
-  /* Brand — same Material Green hue, tuned for a dark canvas. */
-  --brand:          #4caf50;
-  --brand-hover:    #66bb6a;   /* lighten on hover against dark */
-  --brand-active:   #43a047;
-  --brand-soft:     rgb(76 175 80 / 0.15);   /* soft fill on dark */
-  --brand-contrast: #ffffff;
-  --brand-ring:     0 0 0 3px rgb(76 175 80 / 0.35);
+  /* Brand — same logo grass green (RAL 6018), tuned for a dark canvas. */
+  --brand:          #57a639;
+  --brand-hover:    #70b456;   /* lighten on hover against dark */
+  --brand-active:   #4e9533;
+  --brand-soft:     rgb(87 166 57 / 0.15);   /* soft fill on dark */
+  --brand-contrast: #0d1117;
+  --brand-ring:     0 0 0 3px rgb(87 166 57 / 0.35);
 
   /* State — brighter, cooler status green so brand != OK on dark. */
   --ok:    #34d399;  --ok-soft:   rgb(52 211 153 / 0.14);  --ok-border:   rgb(52 211 153 / 0.35);  /* emerald-400 */

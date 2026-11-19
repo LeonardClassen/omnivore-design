@@ -11,8 +11,8 @@
    ========================================================================= */
 
 /* ---- Typography helpers -------------------------------------------------- */
-.omv-h1     { font-size: var(--fs-2xl); line-height: var(--lh-2xl); font-weight: var(--fw-semibold); letter-spacing: var(--tracking-tight); color: var(--text); margin: 0; }
-.omv-h2     { font-size: var(--fs-xl);  line-height: var(--lh-xl);  font-weight: var(--fw-semibold); letter-spacing: var(--tracking-tight); color: var(--text); margin: 0; }
+.omv-h1     { font-family: var(--font-display); font-size: var(--fs-2xl); line-height: var(--lh-2xl); font-weight: var(--fw-semibold); letter-spacing: var(--tracking-tight); color: var(--text); margin: 0; }
+.omv-h2     { font-family: var(--font-display); font-size: var(--fs-xl);  line-height: var(--lh-xl);  font-weight: var(--fw-semibold); letter-spacing: var(--tracking-tight); color: var(--text); margin: 0; }
 .omv-h3     { font-size: var(--fs-lg);  line-height: var(--lh-lg);  font-weight: var(--fw-semibold); color: var(--text); margin: 0; }
 .omv-body   { font-size: var(--fs-base); line-height: var(--lh-base); color: var(--text); }
 .omv-meta   { font-size: var(--fs-sm); line-height: var(--lh-sm); color: var(--text-secondary); }
@@ -121,7 +121,7 @@ select.omv-input { padding-right: 32px; appearance: none; cursor: pointer; }
   display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;
   margin-bottom: 16px;
 }
-.omv-card-title { font-size: 16px; font-weight: var(--fw-semibold); letter-spacing: -0.005em; color: var(--text); }
+.omv-card-title { font-family: var(--font-display); font-size: 16px; font-weight: var(--fw-semibold); letter-spacing: -0.005em; color: var(--text); }
 
 /* ---- Banner -------------------------------------------------------------- */
 .omv-banner {

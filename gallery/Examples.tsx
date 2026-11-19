@@ -379,7 +379,7 @@ function CloudExample() {
     <div className="ex-frame ex-cloud">
       <header className="ex-cloud-top">
         <Fly height={34} dark={false} />
-        <strong>Omnivore</strong>
+        <span className="ex-cloud-brand">Omnivore</span>
         <Tabs
           tabs={[
             { id: "anlagen", label: "Anlagen" },

@@ -4,6 +4,9 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Omnivore Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" />
 <style>
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
@@ -31,7 +34,7 @@
     width: 28px; height: 28px; border-radius: 8px; background: var(--brand);
     display: grid; place-items: center; color: var(--brand-contrast); font-weight: 700; font-size: 15px;
   }
-  .gal-brand-name { font-weight: 600; font-size: 15px; letter-spacing: -0.01em; color: var(--text); }
+  .gal-brand-name { font-family: var(--font-display); font-weight: 600; font-size: 15px; letter-spacing: -0.01em; color: var(--text); }
   .gal-brand-sub { font-size: 12px; color: var(--text-tertiary); }
   /* nav + theme reuse .omv-tabs, but as topbar controls they carry no baseline */
   .gal-nav.omv-tabs, .gal-theme.omv-tabs { border-bottom: 0; }
@@ -47,6 +50,7 @@
     padding: 4px 10px 4px 4px; border-radius: 999px; font: inherit; font-size: 12px;
     background: transparent; color: var(--text-secondary); border: 1px solid var(--border);
   }
+  .gal-greenbar-sep { width: 1px; align-self: stretch; background: var(--border); margin: 0 8px; flex: none; }
   .gal-chip.is-active { border-color: var(--text); color: var(--text); }
   .gal-chip-sw { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; }
   .gal-chip-txt { display: flex; flex-direction: column; line-height: 1.2; text-align: left; }
@@ -91,7 +95,7 @@
   .ex-slot-n { font-family: var(--font-mono); font-weight: 700; font-size: 14px; }
 
   .ex-cloud-top { display: flex; align-items: center; gap: 14px; padding: 10px 20px; background: var(--surface); border-bottom: 1px solid var(--border); }
-  .ex-cloud-logo { height: 34px; width: auto; display: block; }
+  .ex-cloud-brand { font-family: var(--font-display); font-weight: 600; font-size: 16px; }
   .ex-cloud-tabs.omv-tabs { border-bottom: 0; margin-right: auto; margin-left: 12px; }
 
   @media (max-width: 720px) {

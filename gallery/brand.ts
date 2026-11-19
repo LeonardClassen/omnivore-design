@@ -6,6 +6,24 @@ import type { Theme } from "./App";
 
 export type BrandChoice = { key: string; hex: string; label: string };
 
+/** The choice that equals tokens.css (no override applied). */
+export const TOKEN_BRAND_KEY = "R";
+
+export type FontChoice = { key: string; label: string; display: string | null; sans: string | null };
+const MONTSERRAT = '"Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif';
+export const FONT_CHOICES: FontChoice[] = [
+  { key: "inter", label: "Inter", display: null, sans: null },
+  { key: "mont-head", label: "Montserrat Überschriften", display: MONTSERRAT, sans: null },
+  { key: "mont-all", label: "Montserrat überall", display: MONTSERRAT, sans: MONTSERRAT },
+];
+
+/** Override the font tokens on <html>; null keeps tokens.css. */
+export function applyFont(f: FontChoice) {
+  const s = document.documentElement.style;
+  f.display ? s.setProperty("--font-display", f.display) : s.removeProperty("--font-display");
+  f.sans ? s.setProperty("--font-sans", f.sans) : s.removeProperty("--font-sans");
+}
+
 export const BRAND_CHOICES: BrandChoice[] = [
   // Official logo greens (assets/logo/flach): V6a delivery spec, later grass-green version.
   { key: "V", hex: "#95c11f", label: "Logo V6a (Abgabe)" },
@@ -17,7 +35,7 @@ export const BRAND_CHOICES: BrandChoice[] = [
   { key: "E", hex: "#66a57c", label: "Minze mittel" },
   { key: "F", hex: "#7ac79d", label: "Minze hell" },
   { key: "G", hex: "#92e0b7", label: "Minze Glanz" },
-  { key: "Z", hex: "#4caf50", label: "heute (Material)" },
+  { key: "Z", hex: "#4caf50", label: "alt (Material)" },
 ];
 
 const BRAND_VARS = [
