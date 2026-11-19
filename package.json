@@ -7,12 +7,14 @@
   "files": [
     "tokens.css",
     "components.css",
-    "ui"
+    "ui",
+    "fonts"
   ],
   "exports": {
     "./tokens.css": "./tokens.css",
     "./components.css": "./components.css",
-    "./ui": "./ui/src/index.ts"
+    "./ui": "./ui/src/index.ts",
+    "./fonts.css": "./fonts/fonts.css"
   },
   "peerDependencies": {
     "react": ">=18"
@@ -36,6 +38,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "a11y": "node scripts/a11y.mjs"
+    "a11y": "node scripts/a11y.mjs",
+    "fonts": "node scripts/fonts.mjs"
   }
 }

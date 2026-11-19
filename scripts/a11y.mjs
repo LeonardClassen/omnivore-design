@@ -19,6 +19,9 @@ const base = "http://localhost:5199/omnivore-design/";
 
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+// The HMI panel is offline: every font must come from this repo, never a CDN.
+const external = [];
+await page.route(/fonts\.(googleapis|gstatic)\.com/, (r) => { external.push(r.request().url()); return r.abort(); });
 
 // Each case: [name, setup(page)] — setup navigates and brings the screen into the state to check.
 const theme = (label) => async (p) => p.getByRole("button", { name: label, exact: true }).click();
@@ -97,6 +100,14 @@ await page.keyboard.press("Escape");
 await page.waitForTimeout(100);
 const back = await page.evaluate(() => document.activeElement?.textContent ?? "");
 check(back.includes("Neuer Auftrag"), `closing the modal returns focus to its opener (focused: "${back}")`);
+
+// Fonts load from the repo (offline panel).
+const fonts = await page.evaluate(async () => {
+  await document.fonts.ready;
+  return ["600 16px Montserrat", "400 14px Inter", "400 14px \"JetBrains Mono\""].map((f) => [f, document.fonts.check(f) && [...document.fonts].some((ff) => f.includes(ff.family.replace(/"/g, "")) && ff.status === "loaded")]);
+});
+for (const [f, ok] of fonts) check(ok, `font loaded locally: ${f}`);
+check(external.length === 0, `no font requests to Google (${external.length})`);
 
 // Reduced motion: transitions and the skeleton shimmer stop.
 await page.emulateMedia({ reducedMotion: "reduce" });
