@@ -288,6 +288,12 @@ select.omv-input { padding-right: 32px; appearance: none; cursor: pointer; }
   background: color-mix(in srgb, var(--brand) 28%, transparent);
 }
 
+/* Salience budget on the panel (AMA ADR-013, HMI-INV-130; ISA-101 / High
+   Performance HMI): a normal measured value stays neutral text — saturated
+   colour belongs to the abnormal. `ok` may confirm as a muted LED dot, never on
+   the value; only warn/err colour a value. Cloud keeps its green ok value. */
+[data-theme="dark-industrial"] .omv-stat-value.is-ok { color: var(--text); }
+
 /* Card titles: semibold on cloud, tiny mono-uppercase label on the panel. */
 [data-theme="dark-industrial"] .omv-card-title {
   font-family: var(--font-mono);

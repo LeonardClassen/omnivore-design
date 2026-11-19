@@ -4,6 +4,12 @@ All notable changes to the Omnivore Design System. Format: [Keep a Changelog](ht
 versions follow [SemVer](https://semver.org/) — while `0.x`, a minor bump may break token names or component props
 (called out under **Breaking**). Consumers pin the submodule to a `vX.Y.Z` tag.
 
+## [0.4.1] — 2026-11-19
+
+### Fixed
+- HMI salience budget (plant ADR-013, HMI-INV-130): on `dark-industrial`, `<Stat tone="ok">` keeps the
+  measured value neutral; only warn/err colour a value. `npm run a11y` measures it.
+
 ## [0.4.0] — 2026-11-19
 
 Brand from the official logo, WCAG 2.2 AA, offline fonts.

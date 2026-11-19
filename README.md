@@ -84,6 +84,20 @@ Different hues (yellow-green brand vs cool status-emerald): `--brand #57a639` (t
 green, RAL 6018) vs `--ok #10b981` / dark `#34d399`. Don't use `--brand` for status or `--ok`
 for interaction.
 
+## Salience budget on the HMI (dark-industrial)
+
+Owned by the plant repo's **ADR-013** (`AutomatisierteMastanlageV2.1/10_design/decisions/`) and
+`HMI-INV-130`; the design system enforces it, it does not redefine it. The HMI keeps its coloured
+dark language but reserves **saturated colour for the abnormal** (ISA-101 / High Performance HMI):
+
+- a normal **measured value is neutral text** — `<Stat tone="ok">` leaves the value uncoloured on
+  this theme; only `warn` / `err` colour a value;
+- `--ok` green confirms sparingly: a muted LED dot, never a fill, never a value;
+- alarms come in **two classes**, fault (`--err`) and warning (`--warn`) — deliberately **no
+  priority ranks** (plant spec `diagnostics_chain`, DIAG-UI-225), so there are no priority tokens.
+
+`npm run a11y` measures the rule on the rendered HMI example (computed colour, not class names).
+
 ## Colour as text — the `-text` tokens
 
 The base role colours (`--brand`, `--ok`, `--warn`, `--err`, `--info`) are for **fills, dots and

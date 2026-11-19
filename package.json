@@ -1,6 +1,6 @@
 {
   "name": "@omnivore/design",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Omnivore Design System — shared CSS tokens + React primitive library, two surfaces (light-cloud / dark-industrial).",
   "type": "module",
   "license": "UNLICENSED",

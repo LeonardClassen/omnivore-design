@@ -109,6 +109,20 @@ const fonts = await page.evaluate(async () => {
 for (const [f, ok] of fonts) check(ok, `font loaded locally: ${f}`);
 check(external.length === 0, `no font requests to Google (${external.length})`);
 
+// Salience rule for the HMI (AMA ADR-013 + HMI-INV-130): in dark-industrial a
+// normal measured value is neutral text; only warn/err may colour a value.
+await theme("Dark · Industrial")(page);
+await page.getByRole("tab", { name: "HMI · Panel an der Anlage" }).click();
+await page.getByRole("button", { name: "Cockpit", exact: true }).click();
+const valueColours = await page.evaluate(() => {
+  const text = getComputedStyle(document.documentElement).getPropertyValue("--text").trim();
+  const probe = document.createElement("span"); probe.style.color = text; document.body.append(probe);
+  const textRgb = getComputedStyle(probe).color; probe.remove();
+  return [...document.querySelectorAll(".omv-stat-value:not(.is-warn):not(.is-err)")].map((el) => [el.textContent, getComputedStyle(el).color === textRgb]);
+});
+check(valueColours.length > 0 && valueColours.every(([, ok]) => ok), `HMI: normal measured values are neutral text (${valueColours.map(([t, ok]) => `${t}:${ok ? "neutral" : "COLOURED"}`).join(", ")})`);
+await theme("Light · Cloud")(page);
+
 // Reduced motion: transitions and the skeleton shimmer stop.
 await page.emulateMedia({ reducedMotion: "reduce" });
 const motion = await page.evaluate(() => {

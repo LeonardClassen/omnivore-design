@@ -2,6 +2,8 @@ import { cn } from "./cn";
 
 // Stat — label + big tabular-mono value (+ optional unit/hint). Tone tints the
 // value with a state color; live values never jitter (tabular numerics).
+// On the HMI theme `ok` leaves the value neutral (salience budget, AMA ADR-013):
+// only warn/err colour a measured value there.
 
 export function Stat({
   label,
